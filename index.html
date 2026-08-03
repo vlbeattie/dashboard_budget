@@ -51,7 +51,7 @@
     <section class="bg-white rounded-lg border border-slate-200 p-6">
       <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <div class="chart-container">
-          <canvas id="category-pie-chart"></canvas>
+          <canvas id="category-pie-chart" role="img" aria-label="Pie chart of spending by category for the selected date range. See the legend and total below for exact figures."></canvas>
         </div>
         <div class="w-full md:w-72 shrink-0">
           <div class="mb-4">
@@ -72,7 +72,6 @@
     </section>
   </main>
 
-  <script src="js/data.js"></script>
-  <script src="js/pages/spending-by-category.js"></script>
+  <script type="module" src="js/pages/spending-by-category.js"></script>
 </body>
 </html>

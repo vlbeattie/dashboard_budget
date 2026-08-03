@@ -1,4 +1,13 @@
 // Page logic for the "Spending by Category" pie chart page.
+import {
+  loadTransactions,
+  filterByDateRange,
+  getDataDateBounds,
+  getPresetRange,
+  aggregateByCategory,
+  groupSmallCategories,
+} from "../data.js";
+
 const PALETTE = [
   "#2563eb", "#dc2626", "#16a34a", "#d97706", "#7c3aed",
   "#0891b2", "#db2777", "#65a30d", "#ea580c", "#4f46e5",
@@ -60,7 +69,7 @@ function renderLegend(slices, grandTotal) {
         <span class="legend-swatch" style="background-color: ${colorForIndex(slice.category, i)}"></span>
         <span class="truncate">${slice.category}</span>
       </span>
-      <span class="text-slate-600 whitespace-nowrap">${formatCurrency(slice.total)} <span class="text-slate-400">(${pct}%)</span></span>
+      <span class="text-slate-600 whitespace-nowrap">${formatCurrency(slice.total)} <span class="text-slate-500">(${pct}%)</span></span>
     `;
     legendEl.appendChild(row);
   });
@@ -115,6 +124,10 @@ function setActivePreset(activeBtn) {
     btn.classList.toggle("border-slate-900", isActive);
     btn.classList.toggle("bg-white", !isActive);
     btn.classList.toggle("text-slate-700", !isActive);
+    // The active button keeps a dark hover state so its white text stays
+    // readable; inactive buttons use the light hover state.
+    btn.classList.toggle("hover:bg-slate-900", isActive);
+    btn.classList.toggle("hover:bg-slate-100", !isActive);
   });
 }
 
@@ -128,8 +141,8 @@ function applyPreset(preset, btn) {
 
 function clearActivePreset() {
   document.querySelectorAll(".preset-btn").forEach((btn) => {
-    btn.classList.remove("bg-slate-900", "text-white", "border-slate-900");
-    btn.classList.add("bg-white", "text-slate-700");
+    btn.classList.remove("bg-slate-900", "text-white", "border-slate-900", "hover:bg-slate-900");
+    btn.classList.add("bg-white", "text-slate-700", "hover:bg-slate-100");
   });
 }
 
