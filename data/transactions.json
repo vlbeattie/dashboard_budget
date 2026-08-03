@@ -1,0 +1,1242 @@
+[
+  {
+    "date": "2026-04-25",
+    "category": "Groceries",
+    "amount": 42.61
+  },
+  {
+    "date": "2026-04-25",
+    "category": "Restaurants & Dining",
+    "amount": 44.89
+  },
+  {
+    "date": "2026-04-26",
+    "category": "Shopping-General Merchandise",
+    "amount": 1.02
+  },
+  {
+    "date": "2026-04-26",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 21.2
+  },
+  {
+    "date": "2026-04-27",
+    "category": "Local/Misc",
+    "amount": 25.44
+  },
+  {
+    "date": "2026-04-27",
+    "category": "Shopping-General Merchandise",
+    "amount": 38.4
+  },
+  {
+    "date": "2026-04-27",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 1.05
+  },
+  {
+    "date": "2026-04-27",
+    "category": "Rent",
+    "amount": 2150
+  },
+  {
+    "date": "2026-04-28",
+    "category": "Shopping-General Merchandise",
+    "amount": 1.7
+  },
+  {
+    "date": "2026-04-28",
+    "category": "Shopping-General Merchandise",
+    "amount": 36.01
+  },
+  {
+    "date": "2026-04-29",
+    "category": "Insurance",
+    "amount": 558.9
+  },
+  {
+    "date": "2026-04-29",
+    "category": "Shopping-General Merchandise",
+    "amount": 9.52
+  },
+  {
+    "date": "2026-04-30",
+    "category": "Professional/Membership Dues",
+    "amount": 20
+  },
+  {
+    "date": "2026-04-30",
+    "category": "Utilities/Lawn Service",
+    "amount": 0.83
+  },
+  {
+    "date": "2026-04-30",
+    "category": "Utilities/Lawn Service",
+    "amount": 181.67
+  },
+  {
+    "date": "2026-05-01",
+    "category": "Travel-Lodging/Booking",
+    "amount": 52.49
+  },
+  {
+    "date": "2026-05-01",
+    "category": "Utilities/Lawn Service",
+    "amount": 54.65
+  },
+  {
+    "date": "2026-05-01",
+    "category": "Gifts & Donations",
+    "amount": 28
+  },
+  {
+    "date": "2026-05-02",
+    "category": "Travel-Lodging/Booking",
+    "amount": 195.5
+  },
+  {
+    "date": "2026-05-02",
+    "category": "Gifts & Donations",
+    "amount": 23.2
+  },
+  {
+    "date": "2026-05-02",
+    "category": "Groceries",
+    "amount": 93.66
+  },
+  {
+    "date": "2026-05-03",
+    "category": "Travel-Lodging/Booking",
+    "amount": 195.5
+  },
+  {
+    "date": "2026-05-03",
+    "category": "Travel-Lodging/Booking",
+    "amount": 46.07
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Health",
+    "amount": 5
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Shopping-General Merchandise",
+    "amount": 38.74
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Travel-Lodging/Booking",
+    "amount": 3.49
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Local/Misc",
+    "amount": 9.45
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Family Support",
+    "amount": 488.78
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Shopping-General Merchandise",
+    "amount": 42.92
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Local/Misc",
+    "amount": 31.8
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Local/Misc",
+    "amount": 6
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Shopping-General Merchandise",
+    "amount": 47.35
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Childcare/Care Services",
+    "amount": 79.35
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Gifts & Donations",
+    "amount": 25
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Gifts & Donations",
+    "amount": 30
+  },
+  {
+    "date": "2026-05-04",
+    "category": "Family Support",
+    "amount": 450
+  },
+  {
+    "date": "2026-05-05",
+    "category": "Taxes-Property/Local",
+    "amount": 1361.62
+  },
+  {
+    "date": "2026-05-05",
+    "category": "Gifts & Donations",
+    "amount": 15
+  },
+  {
+    "date": "2026-05-05",
+    "category": "Family Support",
+    "amount": 2918.03
+  },
+  {
+    "date": "2026-05-05",
+    "category": "Insurance",
+    "amount": 399.33
+  },
+  {
+    "date": "2026-05-05",
+    "category": "Shopping-General Merchandise",
+    "amount": 68.9
+  },
+  {
+    "date": "2026-05-06",
+    "category": "Shopping-General Merchandise",
+    "amount": 63.6
+  },
+  {
+    "date": "2026-05-06",
+    "category": "Groceries",
+    "amount": 14.4
+  },
+  {
+    "date": "2026-05-06",
+    "category": "Groceries",
+    "amount": 73.72
+  },
+  {
+    "date": "2026-05-06",
+    "category": "Groceries",
+    "amount": 23.47
+  },
+  {
+    "date": "2026-05-07",
+    "category": "Groceries",
+    "amount": 11.86
+  },
+  {
+    "date": "2026-05-08",
+    "category": "Professional/Membership Dues",
+    "amount": 19.73
+  },
+  {
+    "date": "2026-05-08",
+    "category": "Professional/Membership Dues",
+    "amount": 115.63
+  },
+  {
+    "date": "2026-05-09",
+    "category": "Shopping-General Merchandise",
+    "amount": 0.04
+  },
+  {
+    "date": "2026-05-09",
+    "category": "Groceries",
+    "amount": 68.8
+  },
+  {
+    "date": "2026-05-09",
+    "category": "Shopping-General Merchandise",
+    "amount": 16.96
+  },
+  {
+    "date": "2026-05-09",
+    "category": "Restaurants & Dining",
+    "amount": 10
+  },
+  {
+    "date": "2026-05-10",
+    "category": "Travel-Lodging/Booking",
+    "amount": 59.96
+  },
+  {
+    "date": "2026-05-11",
+    "category": "Health",
+    "amount": 40.55
+  },
+  {
+    "date": "2026-05-11",
+    "category": "Health",
+    "amount": 102.96
+  },
+  {
+    "date": "2026-05-11",
+    "category": "Shopping-General Merchandise",
+    "amount": 14.45
+  },
+  {
+    "date": "2026-05-11",
+    "category": "Shopping-General Merchandise",
+    "amount": 21.95
+  },
+  {
+    "date": "2026-05-11",
+    "category": "Local/Misc",
+    "amount": 14.16
+  },
+  {
+    "date": "2026-05-11",
+    "category": "Shopping-General Merchandise",
+    "amount": 12.69
+  },
+  {
+    "date": "2026-05-11",
+    "category": "Shopping-General Merchandise",
+    "amount": 4.47
+  },
+  {
+    "date": "2026-05-12",
+    "category": "Shopping-General Merchandise",
+    "amount": 4.95
+  },
+  {
+    "date": "2026-05-12",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 0.99
+  },
+  {
+    "date": "2026-05-13",
+    "category": "Shopping-General Merchandise",
+    "amount": 79.28
+  },
+  {
+    "date": "2026-05-13",
+    "category": "Transportation",
+    "amount": 5.2
+  },
+  {
+    "date": "2026-05-13",
+    "category": "Transportation",
+    "amount": 19
+  },
+  {
+    "date": "2026-05-13",
+    "category": "Restaurants & Dining",
+    "amount": 99.6
+  },
+  {
+    "date": "2026-05-13",
+    "category": "Health",
+    "amount": 38.93
+  },
+  {
+    "date": "2026-05-13",
+    "category": "Shopping-General Merchandise",
+    "amount": 7.94
+  },
+  {
+    "date": "2026-05-15",
+    "category": "Groceries",
+    "amount": 94.23
+  },
+  {
+    "date": "2026-05-15",
+    "category": "Shopping-General Merchandise",
+    "amount": 12.67
+  },
+  {
+    "date": "2026-05-15",
+    "category": "Entertainment/Media",
+    "amount": 29
+  },
+  {
+    "date": "2026-05-15",
+    "category": "Entertainment/Media",
+    "amount": 22.26
+  },
+  {
+    "date": "2026-05-15",
+    "category": "Gifts & Donations",
+    "amount": 15
+  },
+  {
+    "date": "2026-05-16",
+    "category": "Gifts & Donations",
+    "amount": 41
+  },
+  {
+    "date": "2026-05-16",
+    "category": "Groceries",
+    "amount": 112.81
+  },
+  {
+    "date": "2026-05-16",
+    "category": "Health",
+    "amount": 515.2
+  },
+  {
+    "date": "2026-05-16",
+    "category": "Utilities/Lawn Service",
+    "amount": 32.47
+  },
+  {
+    "date": "2026-05-17",
+    "category": "Gifts & Donations",
+    "amount": 30
+  },
+  {
+    "date": "2026-05-17",
+    "category": "Shopping-General Merchandise",
+    "amount": 15.23
+  },
+  {
+    "date": "2026-05-18",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 10
+  },
+  {
+    "date": "2026-05-18",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 14.95
+  },
+  {
+    "date": "2026-05-19",
+    "category": "Utilities/Lawn Service",
+    "amount": 95.35
+  },
+  {
+    "date": "2026-05-19",
+    "category": "Home-Appliance/Repair",
+    "amount": 42.13
+  },
+  {
+    "date": "2026-05-19",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 21.2
+  },
+  {
+    "date": "2026-05-19",
+    "category": "Gifts & Donations",
+    "amount": 8
+  },
+  {
+    "date": "2026-05-19",
+    "category": "Travel-Lodging/Booking",
+    "amount": 50.9
+  },
+  {
+    "date": "2026-05-19",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 21.2
+  },
+  {
+    "date": "2026-05-20",
+    "category": "Utilities/Lawn Service",
+    "amount": 212.28
+  },
+  {
+    "date": "2026-05-20",
+    "category": "Health",
+    "amount": 53
+  },
+  {
+    "date": "2026-05-20",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 10.59
+  },
+  {
+    "date": "2026-05-20",
+    "category": "Gifts & Donations",
+    "amount": 25
+  },
+  {
+    "date": "2026-05-20",
+    "category": "Utilities/Lawn Service",
+    "amount": 104.72
+  },
+  {
+    "date": "2026-05-20",
+    "category": "Utilities/Lawn Service",
+    "amount": 59.03
+  },
+  {
+    "date": "2026-05-20",
+    "category": "Shopping-General Merchandise",
+    "amount": 51.98
+  },
+  {
+    "date": "2026-05-22",
+    "category": "Card Fees/Credits/Interest",
+    "amount": 32.53
+  },
+  {
+    "date": "2026-05-22",
+    "category": "Gifts & Donations",
+    "amount": 28
+  },
+  {
+    "date": "2026-05-22",
+    "category": "Utilities/Lawn Service",
+    "amount": 74.99
+  },
+  {
+    "date": "2026-05-22",
+    "category": "Gifts & Donations",
+    "amount": 52.75
+  },
+  {
+    "date": "2026-05-22",
+    "category": "Card Fees/Credits/Interest",
+    "amount": 27
+  },
+  {
+    "date": "2026-05-23",
+    "category": "Travel-Lodging/Booking",
+    "amount": 564.3
+  },
+  {
+    "date": "2026-05-26",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 5
+  },
+  {
+    "date": "2026-05-26",
+    "category": "Professional/Membership Dues",
+    "amount": 115.63
+  },
+  {
+    "date": "2026-05-26",
+    "category": "Health",
+    "amount": 16.72
+  },
+  {
+    "date": "2026-05-26",
+    "category": "Professional/Membership Dues",
+    "amount": 19.73
+  },
+  {
+    "date": "2026-05-26",
+    "category": "Groceries",
+    "amount": 49.95
+  },
+  {
+    "date": "2026-05-26",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 10.59
+  },
+  {
+    "date": "2026-05-26",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 21.2
+  },
+  {
+    "date": "2026-05-26",
+    "category": "Groceries",
+    "amount": 51.76
+  },
+  {
+    "date": "2026-05-26",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 9.22
+  },
+  {
+    "date": "2026-05-27",
+    "category": "Groceries",
+    "amount": 564.12
+  },
+  {
+    "date": "2026-05-27",
+    "category": "Utilities/Lawn Service",
+    "amount": 61.34
+  },
+  {
+    "date": "2026-05-27",
+    "category": "Gifts & Donations",
+    "amount": 44
+  },
+  {
+    "date": "2026-05-28",
+    "category": "Cash Withdrawal",
+    "amount": 220
+  },
+  {
+    "date": "2026-05-28",
+    "category": "Utilities/Lawn Service",
+    "amount": 217.13
+  },
+  {
+    "date": "2026-05-29",
+    "category": "Insurance",
+    "amount": 265.9
+  },
+  {
+    "date": "2026-05-29",
+    "category": "Utilities/Lawn Service",
+    "amount": 44.06
+  },
+  {
+    "date": "2026-05-29",
+    "category": "Family Support",
+    "amount": 2.99
+  },
+  {
+    "date": "2026-05-29",
+    "category": "Rent",
+    "amount": 2150
+  },
+  {
+    "date": "2026-05-30",
+    "category": "Shopping-General Merchandise",
+    "amount": 18.01
+  },
+  {
+    "date": "2026-05-30",
+    "category": "Shopping-General Merchandise",
+    "amount": 79.5
+  },
+  {
+    "date": "2026-05-30",
+    "category": "Shopping-General Merchandise",
+    "amount": 19.07
+  },
+  {
+    "date": "2026-05-31",
+    "category": "Shopping-General Merchandise",
+    "amount": 188.28
+  },
+  {
+    "date": "2026-06-01",
+    "category": "Professional/Membership Dues",
+    "amount": 16.84
+  },
+  {
+    "date": "2026-06-01",
+    "category": "Local/Misc",
+    "amount": 35
+  },
+  {
+    "date": "2026-06-01",
+    "category": "Gifts & Donations",
+    "amount": 44
+  },
+  {
+    "date": "2026-06-01",
+    "category": "Shopping-General Merchandise",
+    "amount": 25.25
+  },
+  {
+    "date": "2026-06-01",
+    "category": "Local/Misc",
+    "amount": 18.02
+  },
+  {
+    "date": "2026-06-01",
+    "category": "Gifts & Donations",
+    "amount": 10
+  },
+  {
+    "date": "2026-06-02",
+    "category": "Family Support",
+    "amount": 450
+  },
+  {
+    "date": "2026-06-02",
+    "category": "Gifts & Donations",
+    "amount": 23.2
+  },
+  {
+    "date": "2026-06-02",
+    "category": "Shopping-General Merchandise",
+    "amount": 13.08
+  },
+  {
+    "date": "2026-06-02",
+    "category": "Family Support",
+    "amount": 1594.34
+  },
+  {
+    "date": "2026-06-02",
+    "category": "Gifts & Donations",
+    "amount": 50
+  },
+  {
+    "date": "2026-06-03",
+    "category": "Gifts & Donations",
+    "amount": 30
+  },
+  {
+    "date": "2026-06-03",
+    "category": "Health",
+    "amount": 5
+  },
+  {
+    "date": "2026-06-03",
+    "category": "Automotive-Maintenance/Registration",
+    "amount": 402.79
+  },
+  {
+    "date": "2026-06-03",
+    "category": "Shopping-General Merchandise",
+    "amount": 51.25
+  },
+  {
+    "date": "2026-06-03",
+    "category": "Automotive-Maintenance/Registration",
+    "amount": 284.2
+  },
+  {
+    "date": "2026-06-04",
+    "category": "Shopping-General Merchandise",
+    "amount": 8.49
+  },
+  {
+    "date": "2026-06-04",
+    "category": "Shopping-General Merchandise",
+    "amount": 4.11
+  },
+  {
+    "date": "2026-06-05",
+    "category": "Insurance",
+    "amount": 399.33
+  },
+  {
+    "date": "2026-06-05",
+    "category": "Shopping-General Merchandise",
+    "amount": 34.96
+  },
+  {
+    "date": "2026-06-05",
+    "category": "Health",
+    "amount": 100
+  },
+  {
+    "date": "2026-06-08",
+    "category": "Restaurants & Dining",
+    "amount": 95
+  },
+  {
+    "date": "2026-06-08",
+    "category": "Transportation",
+    "amount": 14.99
+  },
+  {
+    "date": "2026-06-08",
+    "category": "Transportation",
+    "amount": 18.13
+  },
+  {
+    "date": "2026-06-09",
+    "category": "Travel-Lodging/Booking",
+    "amount": 7.05
+  },
+  {
+    "date": "2026-06-10",
+    "category": "Shopping-General Merchandise",
+    "amount": 84.78
+  },
+  {
+    "date": "2026-06-10",
+    "category": "Shopping-General Merchandise",
+    "amount": 32.4
+  },
+  {
+    "date": "2026-06-11",
+    "category": "Shopping-General Merchandise",
+    "amount": 42.39
+  },
+  {
+    "date": "2026-06-12",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 0.99
+  },
+  {
+    "date": "2026-06-12",
+    "category": "Shopping-General Merchandise",
+    "amount": 4.95
+  },
+  {
+    "date": "2026-06-13",
+    "category": "Shopping-General Merchandise",
+    "amount": 7.94
+  },
+  {
+    "date": "2026-06-15",
+    "category": "Groceries",
+    "amount": 129.14
+  },
+  {
+    "date": "2026-06-15",
+    "category": "Cash Withdrawal",
+    "amount": 260
+  },
+  {
+    "date": "2026-06-15",
+    "category": "Transportation",
+    "amount": 70
+  },
+  {
+    "date": "2026-06-15",
+    "category": "Local/Misc",
+    "amount": 25
+  },
+  {
+    "date": "2026-06-15",
+    "category": "Transportation",
+    "amount": 70
+  },
+  {
+    "date": "2026-06-16",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 14.95
+  },
+  {
+    "date": "2026-06-17",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 6
+  },
+  {
+    "date": "2026-06-17",
+    "category": "Utilities/Lawn Service",
+    "amount": 125.11
+  },
+  {
+    "date": "2026-06-17",
+    "category": "Utilities/Lawn Service",
+    "amount": 59.03
+  },
+  {
+    "date": "2026-06-18",
+    "category": "Utilities/Lawn Service",
+    "amount": 98.58
+  },
+  {
+    "date": "2026-06-18",
+    "category": "Utilities/Lawn Service",
+    "amount": 32.47
+  },
+  {
+    "date": "2026-06-18",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 10
+  },
+  {
+    "date": "2026-06-19",
+    "category": "Travel-Lodging/Booking",
+    "amount": 30
+  },
+  {
+    "date": "2026-06-20",
+    "category": "Restaurants & Dining",
+    "amount": 72.62
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Transportation",
+    "amount": 125
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Utilities/Lawn Service",
+    "amount": 74.99
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 21.2
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 21.2
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Gifts & Donations",
+    "amount": 8
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Groceries",
+    "amount": 26.33
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Utilities/Lawn Service",
+    "amount": 197.28
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Restaurants & Dining",
+    "amount": 9.53
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Transportation",
+    "amount": 70
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Groceries",
+    "amount": 64
+  },
+  {
+    "date": "2026-06-22",
+    "category": "Restaurants & Dining",
+    "amount": 90.77
+  },
+  {
+    "date": "2026-06-23",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 5
+  },
+  {
+    "date": "2026-06-23",
+    "category": "Groceries",
+    "amount": 29.59
+  },
+  {
+    "date": "2026-06-24",
+    "category": "Family Support",
+    "amount": 900
+  },
+  {
+    "date": "2026-06-24",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 10.59
+  },
+  {
+    "date": "2026-06-25",
+    "category": "Utilities/Lawn Service",
+    "amount": 28.28
+  },
+  {
+    "date": "2026-06-25",
+    "category": "Shopping-General Merchandise",
+    "amount": 31.29
+  },
+  {
+    "date": "2026-06-26",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 21.2
+  },
+  {
+    "date": "2026-06-26",
+    "category": "Shopping-General Merchandise",
+    "amount": 53.28
+  },
+  {
+    "date": "2026-06-29",
+    "category": "Rent",
+    "amount": 2150
+  },
+  {
+    "date": "2026-06-29",
+    "category": "Travel-Lodging/Booking",
+    "amount": 6.7
+  },
+  {
+    "date": "2026-06-29",
+    "category": "Gifts & Donations",
+    "amount": 11
+  },
+  {
+    "date": "2026-06-29",
+    "category": "Automotive-Maintenance/Registration",
+    "amount": 222.01
+  },
+  {
+    "date": "2026-06-29",
+    "category": "Groceries",
+    "amount": 92.45
+  },
+  {
+    "date": "2026-06-29",
+    "category": "Groceries",
+    "amount": 15.89
+  },
+  {
+    "date": "2026-06-30",
+    "category": "Transportation",
+    "amount": 7.39
+  },
+  {
+    "date": "2026-06-30",
+    "category": "Transportation",
+    "amount": 36.97
+  },
+  {
+    "date": "2026-06-30",
+    "category": "Transportation",
+    "amount": 70
+  },
+  {
+    "date": "2026-06-30",
+    "category": "Utilities/Lawn Service",
+    "amount": 217.13
+  },
+  {
+    "date": "2026-06-30",
+    "category": "Insurance",
+    "amount": 265.9
+  },
+  {
+    "date": "2026-07-01",
+    "category": "Transportation",
+    "amount": 8.95
+  },
+  {
+    "date": "2026-07-02",
+    "category": "Gifts & Donations",
+    "amount": 23.2
+  },
+  {
+    "date": "2026-07-03",
+    "category": "Gifts & Donations",
+    "amount": 30
+  },
+  {
+    "date": "2026-07-03",
+    "category": "Groceries",
+    "amount": 23.47
+  },
+  {
+    "date": "2026-07-03",
+    "category": "Automotive-Maintenance/Registration",
+    "amount": 854.39
+  },
+  {
+    "date": "2026-07-03",
+    "category": "Health",
+    "amount": 5
+  },
+  {
+    "date": "2026-07-03",
+    "category": "Card Fees/Credits/Interest",
+    "amount": 30
+  },
+  {
+    "date": "2026-07-03",
+    "category": "Shopping-General Merchandise",
+    "amount": 190.78
+  },
+  {
+    "date": "2026-07-06",
+    "category": "Family Support",
+    "amount": 450
+  },
+  {
+    "date": "2026-07-06",
+    "category": "Shopping-General Merchandise",
+    "amount": 44.41
+  },
+  {
+    "date": "2026-07-06",
+    "category": "Shopping-General Merchandise",
+    "amount": 30.15
+  },
+  {
+    "date": "2026-07-06",
+    "category": "Shopping-General Merchandise",
+    "amount": 42.39
+  },
+  {
+    "date": "2026-07-06",
+    "category": "Shopping-General Merchandise",
+    "amount": 25.15
+  },
+  {
+    "date": "2026-07-06",
+    "category": "Family Support",
+    "amount": 3000
+  },
+  {
+    "date": "2026-07-06",
+    "category": "Automotive-Maintenance/Registration",
+    "amount": 133
+  },
+  {
+    "date": "2026-07-07",
+    "category": "Insurance",
+    "amount": 543.6
+  },
+  {
+    "date": "2026-07-07",
+    "category": "Family Support",
+    "amount": 1804.11
+  },
+  {
+    "date": "2026-07-07",
+    "category": "Family Support",
+    "amount": 62.33
+  },
+  {
+    "date": "2026-07-07",
+    "category": "Shopping-General Merchandise",
+    "amount": 13.7
+  },
+  {
+    "date": "2026-07-07",
+    "category": "Gifts & Donations",
+    "amount": 22
+  },
+  {
+    "date": "2026-07-08",
+    "category": "Health",
+    "amount": 13.4
+  },
+  {
+    "date": "2026-07-09",
+    "category": "Shopping-General Merchandise",
+    "amount": 28.61
+  },
+  {
+    "date": "2026-07-12",
+    "category": "Shopping-General Merchandise",
+    "amount": 4.95
+  },
+  {
+    "date": "2026-07-13",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 0.99
+  },
+  {
+    "date": "2026-07-13",
+    "category": "Local/Misc",
+    "amount": 20.91
+  },
+  {
+    "date": "2026-07-13",
+    "category": "Cash Withdrawal",
+    "amount": 40
+  },
+  {
+    "date": "2026-07-13",
+    "category": "Utilities/Lawn Service",
+    "amount": 32.47
+  },
+  {
+    "date": "2026-07-13",
+    "category": "Shopping-General Merchandise",
+    "amount": 7.94
+  },
+  {
+    "date": "2026-07-14",
+    "category": "Utilities/Lawn Service",
+    "amount": 59.03
+  },
+  {
+    "date": "2026-07-14",
+    "category": "Utilities/Lawn Service",
+    "amount": 222.47
+  },
+  {
+    "date": "2026-07-15",
+    "category": "Groceries",
+    "amount": 65.46
+  },
+  {
+    "date": "2026-07-16",
+    "category": "Cash Withdrawal",
+    "amount": 240
+  },
+  {
+    "date": "2026-07-16",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 40
+  },
+  {
+    "date": "2026-07-16",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 14.95
+  },
+  {
+    "date": "2026-07-17",
+    "category": "Utilities/Lawn Service",
+    "amount": 99.78
+  },
+  {
+    "date": "2026-07-20",
+    "category": "Gifts & Donations",
+    "amount": 8
+  },
+  {
+    "date": "2026-07-20",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 21.2
+  },
+  {
+    "date": "2026-07-20",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 21.2
+  },
+  {
+    "date": "2026-07-20",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 10
+  },
+  {
+    "date": "2026-07-20",
+    "category": "Gifts & Donations",
+    "amount": 100
+  },
+  {
+    "date": "2026-07-20",
+    "category": "Utilities/Lawn Service",
+    "amount": 139.04
+  },
+  {
+    "date": "2026-07-21",
+    "category": "Utilities/Lawn Service",
+    "amount": 253.3
+  },
+  {
+    "date": "2026-07-22",
+    "category": "Utilities/Lawn Service",
+    "amount": 74.99
+  },
+  {
+    "date": "2026-07-23",
+    "category": "Utilities/Lawn Service",
+    "amount": 33.02
+  },
+  {
+    "date": "2026-07-23",
+    "category": "Utilities/Lawn Service",
+    "amount": 226.2
+  },
+  {
+    "date": "2026-07-23",
+    "category": "Shopping-General Merchandise",
+    "amount": 12.99
+  },
+  {
+    "date": "2026-07-23",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 5
+  },
+  {
+    "date": "2026-07-23",
+    "category": "Shopping-General Merchandise",
+    "amount": 13.75
+  },
+  {
+    "date": "2026-07-23",
+    "category": "Groceries",
+    "amount": 19.44
+  },
+  {
+    "date": "2026-07-23",
+    "category": "Transportation",
+    "amount": 2.83
+  },
+  {
+    "date": "2026-07-24",
+    "category": "Subscriptions-Software/Digital",
+    "amount": 10.59
+  }
+]

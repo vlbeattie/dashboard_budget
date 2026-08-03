@@ -1,0 +1,18 @@
+/* Small custom styles not easily expressed with Tailwind utility classes
+   (Tailwind is loaded via the CDN "Play CDN" script, which does not process
+   @apply in external stylesheets, so plain CSS is used here instead). */
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 0.2rem;
+  flex-shrink: 0;
+}
