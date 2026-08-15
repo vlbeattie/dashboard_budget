@@ -7,6 +7,7 @@ import {
   aggregateByCategory,
   groupSmallCategories,
 } from "../data.js";
+import { parseTransactionsCsv } from "../csv.js";
 
 const PALETTE = [
   "#2563eb", "#dc2626", "#16a34a", "#d97706", "#7c3aed",
@@ -148,20 +149,20 @@ function clearActivePreset() {
 
 async function init() {
   allTransactions = await loadTransactions();
-  const { min, max } = getDataDateBounds(allTransactions);
+  attachEventListeners();
+  resetDateControlsAndDefaultView();
+}
 
-  const startInput = document.getElementById("start-date");
-  const endInput = document.getElementById("end-date");
-  startInput.min = min;
-  startInput.max = max;
-  endInput.min = min;
-  endInput.max = max;
-
+/** Wires up all one-time event listeners (presets, date inputs, CSV upload). */
+function attachEventListeners() {
   document.querySelectorAll(".preset-btn").forEach((btn) => {
     btn.addEventListener("click", () => applyPreset(btn.dataset.preset, btn));
   });
 
+  const startInput = document.getElementById("start-date");
+  const endInput = document.getElementById("end-date");
   const onCustomDateChange = () => {
+    const { min, max } = getDataDateBounds(allTransactions);
     clearActivePreset();
     const start = startInput.value || min;
     const end = endInput.value || max;
@@ -170,9 +171,74 @@ async function init() {
   startInput.addEventListener("change", onCustomDateChange);
   endInput.addEventListener("change", onCustomDateChange);
 
-  // Default view: All Time.
+  document.getElementById("csv-upload").addEventListener("change", handleCsvUpload);
+}
+
+/** (Re-)applies the current dataset's date bounds and shows the "All Time" view. */
+function resetDateControlsAndDefaultView() {
+  const { min, max } = getDataDateBounds(allTransactions);
+
+  const startInput = document.getElementById("start-date");
+  const endInput = document.getElementById("end-date");
+  startInput.min = min;
+  startInput.max = max;
+  startInput.value = "";
+  endInput.min = min;
+  endInput.max = max;
+  endInput.value = "";
+
   const defaultBtn = document.querySelector('.preset-btn[data-preset="all"]');
   applyPreset("all", defaultBtn);
+}
+
+function showCsvStatus(message, variant) {
+  const el = document.getElementById("csv-upload-status");
+  const variantClasses = {
+    success: ["bg-green-50", "text-green-800", "border", "border-green-200"],
+    warning: ["bg-amber-50", "text-amber-800", "border", "border-amber-200"],
+    error: ["bg-red-50", "text-red-700", "border", "border-red-200"],
+  };
+  el.className = "text-sm rounded-md px-3 py-2";
+  el.classList.add(...variantClasses[variant]);
+  el.textContent = message;
+  el.classList.remove("hidden");
+}
+
+async function handleCsvUpload(event) {
+  const input = event.target;
+  const file = input.files && input.files[0];
+  if (!file) return;
+
+  try {
+    const text = await file.text();
+    const { transactions, warnings, errors } = parseTransactionsCsv(text);
+
+    if (errors.length > 0) {
+      showCsvStatus(errors.join(" "), "error");
+      return;
+    }
+
+    allTransactions = transactions;
+    resetDateControlsAndDefaultView();
+
+    if (warnings.length > 0) {
+      showCsvStatus(
+        `Loaded ${transactions.length} transaction(s) from "${file.name}", but skipped ${warnings.length} row(s): ${warnings.join(" ")}`,
+        "warning"
+      );
+    } else {
+      showCsvStatus(
+        `Loaded ${transactions.length} transaction(s) from "${file.name}". This replaces the sample data until you reload the page.`,
+        "success"
+      );
+    }
+  } catch (err) {
+    console.error(err);
+    showCsvStatus(`Could not read "${file.name}" as a CSV file. See console for details.`, "error");
+  } finally {
+    // Allow re-uploading the same file name again later.
+    input.value = "";
+  }
 }
 
 init().catch((err) => {

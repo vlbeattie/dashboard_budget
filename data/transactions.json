@@ -2,1241 +2,1489 @@
   {
     "date": "2026-04-25",
     "category": "Groceries",
-    "amount": 42.61
+    "amount": 42.61,
+    "description": "Giant Food"
   },
   {
     "date": "2026-04-25",
     "category": "Restaurants & Dining",
-    "amount": 44.89
+    "amount": 44.89,
+    "description": "Chipotle"
   },
   {
     "date": "2026-04-26",
     "category": "Shopping-General Merchandise",
-    "amount": 1.02
+    "amount": 1.02,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-04-26",
     "category": "Subscriptions-Software/Digital",
-    "amount": 21.2
+    "amount": 21.2,
+    "description": "Netflix"
   },
   {
     "date": "2026-04-27",
     "category": "Local/Misc",
-    "amount": 25.44
+    "amount": 25.44,
+    "description": "Corner Pharmacy"
   },
   {
     "date": "2026-04-27",
     "category": "Shopping-General Merchandise",
-    "amount": 38.4
+    "amount": 38.4,
+    "description": "Target"
   },
   {
     "date": "2026-04-27",
     "category": "Subscriptions-Software/Digital",
-    "amount": 1.05
+    "amount": 1.05,
+    "description": "Spotify Premium"
   },
   {
     "date": "2026-04-27",
     "category": "Rent",
-    "amount": 2150
+    "amount": 2150,
+    "description": "Parkview Apartments Rent"
   },
   {
     "date": "2026-04-28",
     "category": "Shopping-General Merchandise",
-    "amount": 1.7
+    "amount": 1.7,
+    "description": "Walmart"
   },
   {
     "date": "2026-04-28",
     "category": "Shopping-General Merchandise",
-    "amount": 36.01
+    "amount": 36.01,
+    "description": "Best Buy"
   },
   {
     "date": "2026-04-29",
     "category": "Insurance",
-    "amount": 558.9
+    "amount": 558.9,
+    "description": "State Farm Auto Insurance"
   },
   {
     "date": "2026-04-29",
     "category": "Shopping-General Merchandise",
-    "amount": 9.52
+    "amount": 9.52,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-04-30",
     "category": "Professional/Membership Dues",
-    "amount": 20
+    "amount": 20,
+    "description": "LinkedIn Premium"
   },
   {
     "date": "2026-04-30",
     "category": "Utilities/Lawn Service",
-    "amount": 0.83
+    "amount": 0.83,
+    "description": "Dominion Energy"
   },
   {
     "date": "2026-04-30",
     "category": "Utilities/Lawn Service",
-    "amount": 181.67
+    "amount": 181.67,
+    "description": "Comcast/Xfinity"
   },
   {
     "date": "2026-05-01",
     "category": "Travel-Lodging/Booking",
-    "amount": 52.49
+    "amount": 52.49,
+    "description": "Marriott Hotels"
   },
   {
     "date": "2026-05-01",
     "category": "Utilities/Lawn Service",
-    "amount": 54.65
+    "amount": 54.65,
+    "description": "County Water Authority"
   },
   {
     "date": "2026-05-01",
     "category": "Gifts & Donations",
-    "amount": 28
+    "amount": 28,
+    "description": "Amazon Gift Order"
   },
   {
     "date": "2026-05-02",
     "category": "Travel-Lodging/Booking",
-    "amount": 195.5
+    "amount": 195.5,
+    "description": "Airbnb"
   },
   {
     "date": "2026-05-02",
     "category": "Gifts & Donations",
-    "amount": 23.2
+    "amount": 23.2,
+    "description": "Red Cross Donation"
   },
   {
     "date": "2026-05-02",
     "category": "Groceries",
-    "amount": 93.66
+    "amount": 93.66,
+    "description": "Trader Joe's"
   },
   {
     "date": "2026-05-03",
     "category": "Travel-Lodging/Booking",
-    "amount": 195.5
+    "amount": 195.5,
+    "description": "Delta Air Lines"
   },
   {
     "date": "2026-05-03",
     "category": "Travel-Lodging/Booking",
-    "amount": 46.07
+    "amount": 46.07,
+    "description": "Expedia Booking"
   },
   {
     "date": "2026-05-04",
     "category": "Health",
-    "amount": 5
+    "amount": 5,
+    "description": "CVS Pharmacy"
   },
   {
     "date": "2026-05-04",
     "category": "Shopping-General Merchandise",
-    "amount": 38.74
+    "amount": 38.74,
+    "description": "Target"
   },
   {
     "date": "2026-05-04",
     "category": "Travel-Lodging/Booking",
-    "amount": 3.49
+    "amount": 3.49,
+    "description": "Marriott Hotels"
   },
   {
     "date": "2026-05-04",
     "category": "Local/Misc",
-    "amount": 9.45
+    "amount": 9.45,
+    "description": "Local Hardware Store"
   },
   {
     "date": "2026-05-04",
     "category": "Family Support",
-    "amount": 488.78
+    "amount": 488.78,
+    "description": "Family Support Transfer"
   },
   {
     "date": "2026-05-04",
     "category": "Shopping-General Merchandise",
-    "amount": 42.92
+    "amount": 42.92,
+    "description": "Walmart"
   },
   {
     "date": "2026-05-04",
     "category": "Local/Misc",
-    "amount": 31.8
+    "amount": 31.8,
+    "description": "Farmers Market"
   },
   {
     "date": "2026-05-04",
     "category": "Local/Misc",
-    "amount": 6
+    "amount": 6,
+    "description": "Dry Cleaners"
   },
   {
     "date": "2026-05-04",
     "category": "Shopping-General Merchandise",
-    "amount": 47.35
+    "amount": 47.35,
+    "description": "Best Buy"
   },
   {
     "date": "2026-05-04",
     "category": "Childcare/Care Services",
-    "amount": 79.35
+    "amount": 79.35,
+    "description": "Sunshine Daycare Center"
   },
   {
     "date": "2026-05-04",
     "category": "Gifts & Donations",
-    "amount": 25
+    "amount": 25,
+    "description": "Local Charity Drive"
   },
   {
     "date": "2026-05-04",
     "category": "Gifts & Donations",
-    "amount": 30
+    "amount": 30,
+    "description": "Etsy Gift Purchase"
   },
   {
     "date": "2026-05-04",
     "category": "Family Support",
-    "amount": 450
+    "amount": 450,
+    "description": "Zelle to C."
   },
   {
     "date": "2026-05-05",
     "category": "Taxes-Property/Local",
-    "amount": 1361.62
+    "amount": 1361.62,
+    "description": "County Property Tax Payment"
   },
   {
     "date": "2026-05-05",
     "category": "Gifts & Donations",
-    "amount": 15
+    "amount": 15,
+    "description": "Amazon Gift Order"
   },
   {
     "date": "2026-05-05",
     "category": "Family Support",
-    "amount": 2918.03
+    "amount": 2918.03,
+    "description": "Zelle to F."
   },
   {
     "date": "2026-05-05",
     "category": "Insurance",
-    "amount": 399.33
+    "amount": 399.33,
+    "description": "Geico Insurance"
   },
   {
     "date": "2026-05-05",
     "category": "Shopping-General Merchandise",
-    "amount": 68.9
+    "amount": 68.9,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-05-06",
     "category": "Shopping-General Merchandise",
-    "amount": 63.6
+    "amount": 63.6,
+    "description": "Target"
   },
   {
     "date": "2026-05-06",
     "category": "Groceries",
-    "amount": 14.4
+    "amount": 14.4,
+    "description": "Safeway"
   },
   {
     "date": "2026-05-06",
     "category": "Groceries",
-    "amount": 73.72
+    "amount": 73.72,
+    "description": "Whole Foods Market"
   },
   {
     "date": "2026-05-06",
     "category": "Groceries",
-    "amount": 23.47
+    "amount": 23.47,
+    "description": "Giant Food"
   },
   {
     "date": "2026-05-07",
     "category": "Groceries",
-    "amount": 11.86
+    "amount": 11.86,
+    "description": "Trader Joe's"
   },
   {
     "date": "2026-05-08",
     "category": "Professional/Membership Dues",
-    "amount": 19.73
+    "amount": 19.73,
+    "description": "Costco Membership"
   },
   {
     "date": "2026-05-08",
     "category": "Professional/Membership Dues",
-    "amount": 115.63
+    "amount": 115.63,
+    "description": "Professional Assoc. Dues"
   },
   {
     "date": "2026-05-09",
     "category": "Shopping-General Merchandise",
-    "amount": 0.04
+    "amount": 0.04,
+    "description": "Walmart"
   },
   {
     "date": "2026-05-09",
     "category": "Groceries",
-    "amount": 68.8
+    "amount": 68.8,
+    "description": "Safeway"
   },
   {
     "date": "2026-05-09",
     "category": "Shopping-General Merchandise",
-    "amount": 16.96
+    "amount": 16.96,
+    "description": "Best Buy"
   },
   {
     "date": "2026-05-09",
     "category": "Restaurants & Dining",
-    "amount": 10
+    "amount": 10,
+    "description": "Local Bistro"
   },
   {
     "date": "2026-05-10",
     "category": "Travel-Lodging/Booking",
-    "amount": 59.96
+    "amount": 59.96,
+    "description": "Airbnb"
   },
   {
     "date": "2026-05-11",
     "category": "Health",
-    "amount": 40.55
+    "amount": 40.55,
+    "description": "Family Medical Clinic"
   },
   {
     "date": "2026-05-11",
     "category": "Health",
-    "amount": 102.96
+    "amount": 102.96,
+    "description": "Dental Associates"
   },
   {
     "date": "2026-05-11",
     "category": "Shopping-General Merchandise",
-    "amount": 14.45
+    "amount": 14.45,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-05-11",
     "category": "Shopping-General Merchandise",
-    "amount": 21.95
+    "amount": 21.95,
+    "description": "Target"
   },
   {
     "date": "2026-05-11",
     "category": "Local/Misc",
-    "amount": 14.16
+    "amount": 14.16,
+    "description": "Corner Pharmacy"
   },
   {
     "date": "2026-05-11",
     "category": "Shopping-General Merchandise",
-    "amount": 12.69
+    "amount": 12.69,
+    "description": "Walmart"
   },
   {
     "date": "2026-05-11",
     "category": "Shopping-General Merchandise",
-    "amount": 4.47
+    "amount": 4.47,
+    "description": "Best Buy"
   },
   {
     "date": "2026-05-12",
     "category": "Shopping-General Merchandise",
-    "amount": 4.95
+    "amount": 4.95,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-05-12",
     "category": "Subscriptions-Software/Digital",
-    "amount": 0.99
+    "amount": 0.99,
+    "description": "Adobe Creative Cloud"
   },
   {
     "date": "2026-05-13",
     "category": "Shopping-General Merchandise",
-    "amount": 79.28
+    "amount": 79.28,
+    "description": "Target"
   },
   {
     "date": "2026-05-13",
     "category": "Transportation",
-    "amount": 5.2
+    "amount": 5.2,
+    "description": "Uber"
   },
   {
     "date": "2026-05-13",
     "category": "Transportation",
-    "amount": 19
+    "amount": 19,
+    "description": "Lyft"
   },
   {
     "date": "2026-05-13",
     "category": "Restaurants & Dining",
-    "amount": 99.6
+    "amount": 99.6,
+    "description": "Panera Bread"
   },
   {
     "date": "2026-05-13",
     "category": "Health",
-    "amount": 38.93
+    "amount": 38.93,
+    "description": "Vision Care Center"
   },
   {
     "date": "2026-05-13",
     "category": "Shopping-General Merchandise",
-    "amount": 7.94
+    "amount": 7.94,
+    "description": "Walmart"
   },
   {
     "date": "2026-05-15",
     "category": "Groceries",
-    "amount": 94.23
+    "amount": 94.23,
+    "description": "Whole Foods Market"
   },
   {
     "date": "2026-05-15",
     "category": "Shopping-General Merchandise",
-    "amount": 12.67
+    "amount": 12.67,
+    "description": "Best Buy"
   },
   {
     "date": "2026-05-15",
     "category": "Entertainment/Media",
-    "amount": 29
+    "amount": 29,
+    "description": "AMC Theatres"
   },
   {
     "date": "2026-05-15",
     "category": "Entertainment/Media",
-    "amount": 22.26
+    "amount": 22.26,
+    "description": "Ticketmaster"
   },
   {
     "date": "2026-05-15",
     "category": "Gifts & Donations",
-    "amount": 15
+    "amount": 15,
+    "description": "Red Cross Donation"
   },
   {
     "date": "2026-05-16",
     "category": "Gifts & Donations",
-    "amount": 41
+    "amount": 41,
+    "description": "Local Charity Drive"
   },
   {
     "date": "2026-05-16",
     "category": "Groceries",
-    "amount": 112.81
+    "amount": 112.81,
+    "description": "Giant Food"
   },
   {
     "date": "2026-05-16",
     "category": "Health",
-    "amount": 515.2
+    "amount": 515.2,
+    "description": "CVS Pharmacy"
   },
   {
     "date": "2026-05-16",
     "category": "Utilities/Lawn Service",
-    "amount": 32.47
+    "amount": 32.47,
+    "description": "GreenScape Lawn Care"
   },
   {
     "date": "2026-05-17",
     "category": "Gifts & Donations",
-    "amount": 30
+    "amount": 30,
+    "description": "Etsy Gift Purchase"
   },
   {
     "date": "2026-05-17",
     "category": "Shopping-General Merchandise",
-    "amount": 15.23
+    "amount": 15.23,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-05-18",
     "category": "Subscriptions-Software/Digital",
-    "amount": 10
+    "amount": 10,
+    "description": "Microsoft 365"
   },
   {
     "date": "2026-05-18",
     "category": "Subscriptions-Software/Digital",
-    "amount": 14.95
+    "amount": 14.95,
+    "description": "Netflix"
   },
   {
     "date": "2026-05-19",
     "category": "Utilities/Lawn Service",
-    "amount": 95.35
+    "amount": 95.35,
+    "description": "Dominion Energy"
   },
   {
     "date": "2026-05-19",
     "category": "Home-Appliance/Repair",
-    "amount": 42.13
+    "amount": 42.13,
+    "description": "ABC Appliance Repair"
   },
   {
     "date": "2026-05-19",
     "category": "Subscriptions-Software/Digital",
-    "amount": 21.2
+    "amount": 21.2,
+    "description": "Spotify Premium"
   },
   {
     "date": "2026-05-19",
     "category": "Gifts & Donations",
-    "amount": 8
+    "amount": 8,
+    "description": "Amazon Gift Order"
   },
   {
     "date": "2026-05-19",
     "category": "Travel-Lodging/Booking",
-    "amount": 50.9
+    "amount": 50.9,
+    "description": "Delta Air Lines"
   },
   {
     "date": "2026-05-19",
     "category": "Subscriptions-Software/Digital",
-    "amount": 21.2
+    "amount": 21.2,
+    "description": "Adobe Creative Cloud"
   },
   {
     "date": "2026-05-20",
     "category": "Utilities/Lawn Service",
-    "amount": 212.28
+    "amount": 212.28,
+    "description": "Comcast/Xfinity"
   },
   {
     "date": "2026-05-20",
     "category": "Health",
-    "amount": 53
+    "amount": 53,
+    "description": "Family Medical Clinic"
   },
   {
     "date": "2026-05-20",
     "category": "Subscriptions-Software/Digital",
-    "amount": 10.59
+    "amount": 10.59,
+    "description": "Microsoft 365"
   },
   {
     "date": "2026-05-20",
     "category": "Gifts & Donations",
-    "amount": 25
+    "amount": 25,
+    "description": "Red Cross Donation"
   },
   {
     "date": "2026-05-20",
     "category": "Utilities/Lawn Service",
-    "amount": 104.72
+    "amount": 104.72,
+    "description": "County Water Authority"
   },
   {
     "date": "2026-05-20",
     "category": "Utilities/Lawn Service",
-    "amount": 59.03
+    "amount": 59.03,
+    "description": "GreenScape Lawn Care"
   },
   {
     "date": "2026-05-20",
     "category": "Shopping-General Merchandise",
-    "amount": 51.98
+    "amount": 51.98,
+    "description": "Target"
   },
   {
     "date": "2026-05-22",
     "category": "Card Fees/Credits/Interest",
-    "amount": 32.53
+    "amount": 32.53,
+    "description": "Annual Card Fee"
   },
   {
     "date": "2026-05-22",
     "category": "Gifts & Donations",
-    "amount": 28
+    "amount": 28,
+    "description": "Local Charity Drive"
   },
   {
     "date": "2026-05-22",
     "category": "Utilities/Lawn Service",
-    "amount": 74.99
+    "amount": 74.99,
+    "description": "Dominion Energy"
   },
   {
     "date": "2026-05-22",
     "category": "Gifts & Donations",
-    "amount": 52.75
+    "amount": 52.75,
+    "description": "Etsy Gift Purchase"
   },
   {
     "date": "2026-05-22",
     "category": "Card Fees/Credits/Interest",
-    "amount": 27
+    "amount": 27,
+    "description": "Interest Charge"
   },
   {
     "date": "2026-05-23",
     "category": "Travel-Lodging/Booking",
-    "amount": 564.3
+    "amount": 564.3,
+    "description": "Expedia Booking"
   },
   {
     "date": "2026-05-26",
     "category": "Subscriptions-Software/Digital",
-    "amount": 5
+    "amount": 5,
+    "description": "Netflix"
   },
   {
     "date": "2026-05-26",
     "category": "Professional/Membership Dues",
-    "amount": 115.63
+    "amount": 115.63,
+    "description": "LinkedIn Premium"
   },
   {
     "date": "2026-05-26",
     "category": "Health",
-    "amount": 16.72
+    "amount": 16.72,
+    "description": "Dental Associates"
   },
   {
     "date": "2026-05-26",
     "category": "Professional/Membership Dues",
-    "amount": 19.73
+    "amount": 19.73,
+    "description": "Costco Membership"
   },
   {
     "date": "2026-05-26",
     "category": "Groceries",
-    "amount": 49.95
+    "amount": 49.95,
+    "description": "Trader Joe's"
   },
   {
     "date": "2026-05-26",
     "category": "Subscriptions-Software/Digital",
-    "amount": 10.59
+    "amount": 10.59,
+    "description": "Spotify Premium"
   },
   {
     "date": "2026-05-26",
     "category": "Subscriptions-Software/Digital",
-    "amount": 21.2
+    "amount": 21.2,
+    "description": "Adobe Creative Cloud"
   },
   {
     "date": "2026-05-26",
     "category": "Groceries",
-    "amount": 51.76
+    "amount": 51.76,
+    "description": "Safeway"
   },
   {
     "date": "2026-05-26",
     "category": "Subscriptions-Software/Digital",
-    "amount": 9.22
+    "amount": 9.22,
+    "description": "Microsoft 365"
   },
   {
     "date": "2026-05-27",
     "category": "Groceries",
-    "amount": 564.12
+    "amount": 564.12,
+    "description": "Whole Foods Market"
   },
   {
     "date": "2026-05-27",
     "category": "Utilities/Lawn Service",
-    "amount": 61.34
+    "amount": 61.34,
+    "description": "Comcast/Xfinity"
   },
   {
     "date": "2026-05-27",
     "category": "Gifts & Donations",
-    "amount": 44
+    "amount": 44,
+    "description": "Amazon Gift Order"
   },
   {
     "date": "2026-05-28",
     "category": "Cash Withdrawal",
-    "amount": 220
+    "amount": 220,
+    "description": "ATM Withdrawal - Chase"
   },
   {
     "date": "2026-05-28",
     "category": "Utilities/Lawn Service",
-    "amount": 217.13
+    "amount": 217.13,
+    "description": "County Water Authority"
   },
   {
     "date": "2026-05-29",
     "category": "Insurance",
-    "amount": 265.9
+    "amount": 265.9,
+    "description": "Allstate Homeowners Policy"
   },
   {
     "date": "2026-05-29",
     "category": "Utilities/Lawn Service",
-    "amount": 44.06
+    "amount": 44.06,
+    "description": "GreenScape Lawn Care"
   },
   {
     "date": "2026-05-29",
     "category": "Family Support",
-    "amount": 2.99
+    "amount": 2.99,
+    "description": "Family Support Transfer"
   },
   {
     "date": "2026-05-29",
     "category": "Rent",
-    "amount": 2150
+    "amount": 2150,
+    "description": "Landlord ACH Payment"
   },
   {
     "date": "2026-05-30",
     "category": "Shopping-General Merchandise",
-    "amount": 18.01
+    "amount": 18.01,
+    "description": "Walmart"
   },
   {
     "date": "2026-05-30",
     "category": "Shopping-General Merchandise",
-    "amount": 79.5
+    "amount": 79.5,
+    "description": "Best Buy"
   },
   {
     "date": "2026-05-30",
     "category": "Shopping-General Merchandise",
-    "amount": 19.07
+    "amount": 19.07,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-05-31",
     "category": "Shopping-General Merchandise",
-    "amount": 188.28
+    "amount": 188.28,
+    "description": "Target"
   },
   {
     "date": "2026-06-01",
     "category": "Professional/Membership Dues",
-    "amount": 16.84
+    "amount": 16.84,
+    "description": "Professional Assoc. Dues"
   },
   {
     "date": "2026-06-01",
     "category": "Local/Misc",
-    "amount": 35
+    "amount": 35,
+    "description": "Local Hardware Store"
   },
   {
     "date": "2026-06-01",
     "category": "Gifts & Donations",
-    "amount": 44
+    "amount": 44,
+    "description": "Red Cross Donation"
   },
   {
     "date": "2026-06-01",
     "category": "Shopping-General Merchandise",
-    "amount": 25.25
+    "amount": 25.25,
+    "description": "Walmart"
   },
   {
     "date": "2026-06-01",
     "category": "Local/Misc",
-    "amount": 18.02
+    "amount": 18.02,
+    "description": "Farmers Market"
   },
   {
     "date": "2026-06-01",
     "category": "Gifts & Donations",
-    "amount": 10
+    "amount": 10,
+    "description": "Local Charity Drive"
   },
   {
     "date": "2026-06-02",
     "category": "Family Support",
-    "amount": 450
+    "amount": 450,
+    "description": "Zelle to C."
   },
   {
     "date": "2026-06-02",
     "category": "Gifts & Donations",
-    "amount": 23.2
+    "amount": 23.2,
+    "description": "Etsy Gift Purchase"
   },
   {
     "date": "2026-06-02",
     "category": "Shopping-General Merchandise",
-    "amount": 13.08
+    "amount": 13.08,
+    "description": "Best Buy"
   },
   {
     "date": "2026-06-02",
     "category": "Family Support",
-    "amount": 1594.34
+    "amount": 1594.34,
+    "description": "Zelle to F."
   },
   {
     "date": "2026-06-02",
     "category": "Gifts & Donations",
-    "amount": 50
+    "amount": 50,
+    "description": "Amazon Gift Order"
   },
   {
     "date": "2026-06-03",
     "category": "Gifts & Donations",
-    "amount": 30
+    "amount": 30,
+    "description": "Red Cross Donation"
   },
   {
     "date": "2026-06-03",
     "category": "Health",
-    "amount": 5
+    "amount": 5,
+    "description": "Vision Care Center"
   },
   {
     "date": "2026-06-03",
     "category": "Automotive-Maintenance/Registration",
-    "amount": 402.79
+    "amount": 402.79,
+    "description": "Jiffy Lube"
   },
   {
     "date": "2026-06-03",
     "category": "Shopping-General Merchandise",
-    "amount": 51.25
+    "amount": 51.25,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-06-03",
     "category": "Automotive-Maintenance/Registration",
-    "amount": 284.2
+    "amount": 284.2,
+    "description": "DMV Registration Renewal"
   },
   {
     "date": "2026-06-04",
     "category": "Shopping-General Merchandise",
-    "amount": 8.49
+    "amount": 8.49,
+    "description": "Target"
   },
   {
     "date": "2026-06-04",
     "category": "Shopping-General Merchandise",
-    "amount": 4.11
+    "amount": 4.11,
+    "description": "Walmart"
   },
   {
     "date": "2026-06-05",
     "category": "Insurance",
-    "amount": 399.33
+    "amount": 399.33,
+    "description": "State Farm Auto Insurance"
   },
   {
     "date": "2026-06-05",
     "category": "Shopping-General Merchandise",
-    "amount": 34.96
+    "amount": 34.96,
+    "description": "Best Buy"
   },
   {
     "date": "2026-06-05",
     "category": "Health",
-    "amount": 100
+    "amount": 100,
+    "description": "CVS Pharmacy"
   },
   {
     "date": "2026-06-08",
     "category": "Restaurants & Dining",
-    "amount": 95
+    "amount": 95,
+    "description": "Sushi House"
   },
   {
     "date": "2026-06-08",
     "category": "Transportation",
-    "amount": 14.99
+    "amount": 14.99,
+    "description": "Metro Transit Fare"
   },
   {
     "date": "2026-06-08",
     "category": "Transportation",
-    "amount": 18.13
+    "amount": 18.13,
+    "description": "EZPass Toll Charge"
   },
   {
     "date": "2026-06-09",
     "category": "Travel-Lodging/Booking",
-    "amount": 7.05
+    "amount": 7.05,
+    "description": "Marriott Hotels"
   },
   {
     "date": "2026-06-10",
     "category": "Shopping-General Merchandise",
-    "amount": 84.78
+    "amount": 84.78,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-06-10",
     "category": "Shopping-General Merchandise",
-    "amount": 32.4
+    "amount": 32.4,
+    "description": "Target"
   },
   {
     "date": "2026-06-11",
     "category": "Shopping-General Merchandise",
-    "amount": 42.39
+    "amount": 42.39,
+    "description": "Walmart"
   },
   {
     "date": "2026-06-12",
     "category": "Subscriptions-Software/Digital",
-    "amount": 0.99
+    "amount": 0.99,
+    "description": "Netflix"
   },
   {
     "date": "2026-06-12",
     "category": "Shopping-General Merchandise",
-    "amount": 4.95
+    "amount": 4.95,
+    "description": "Best Buy"
   },
   {
     "date": "2026-06-13",
     "category": "Shopping-General Merchandise",
-    "amount": 7.94
+    "amount": 7.94,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-06-15",
     "category": "Groceries",
-    "amount": 129.14
+    "amount": 129.14,
+    "description": "Giant Food"
   },
   {
     "date": "2026-06-15",
     "category": "Cash Withdrawal",
-    "amount": 260
+    "amount": 260,
+    "description": "ATM Withdrawal - Bank of America"
   },
   {
     "date": "2026-06-15",
     "category": "Transportation",
-    "amount": 70
+    "amount": 70,
+    "description": "Uber"
   },
   {
     "date": "2026-06-15",
     "category": "Local/Misc",
-    "amount": 25
+    "amount": 25,
+    "description": "Dry Cleaners"
   },
   {
     "date": "2026-06-15",
     "category": "Transportation",
-    "amount": 70
+    "amount": 70,
+    "description": "Lyft"
   },
   {
     "date": "2026-06-16",
     "category": "Subscriptions-Software/Digital",
-    "amount": 14.95
+    "amount": 14.95,
+    "description": "Spotify Premium"
   },
   {
     "date": "2026-06-17",
     "category": "Subscriptions-Software/Digital",
-    "amount": 6
+    "amount": 6,
+    "description": "Adobe Creative Cloud"
   },
   {
     "date": "2026-06-17",
     "category": "Utilities/Lawn Service",
-    "amount": 125.11
+    "amount": 125.11,
+    "description": "Dominion Energy"
   },
   {
     "date": "2026-06-17",
     "category": "Utilities/Lawn Service",
-    "amount": 59.03
+    "amount": 59.03,
+    "description": "Comcast/Xfinity"
   },
   {
     "date": "2026-06-18",
     "category": "Utilities/Lawn Service",
-    "amount": 98.58
+    "amount": 98.58,
+    "description": "County Water Authority"
   },
   {
     "date": "2026-06-18",
     "category": "Utilities/Lawn Service",
-    "amount": 32.47
+    "amount": 32.47,
+    "description": "GreenScape Lawn Care"
   },
   {
     "date": "2026-06-18",
     "category": "Subscriptions-Software/Digital",
-    "amount": 10
+    "amount": 10,
+    "description": "Microsoft 365"
   },
   {
     "date": "2026-06-19",
     "category": "Travel-Lodging/Booking",
-    "amount": 30
+    "amount": 30,
+    "description": "Airbnb"
   },
   {
     "date": "2026-06-20",
     "category": "Restaurants & Dining",
-    "amount": 72.62
+    "amount": 72.62,
+    "description": "Chipotle"
   },
   {
     "date": "2026-06-22",
     "category": "Transportation",
-    "amount": 125
+    "amount": 125,
+    "description": "Metro Transit Fare"
   },
   {
     "date": "2026-06-22",
     "category": "Utilities/Lawn Service",
-    "amount": 74.99
+    "amount": 74.99,
+    "description": "Dominion Energy"
   },
   {
     "date": "2026-06-22",
     "category": "Subscriptions-Software/Digital",
-    "amount": 21.2
+    "amount": 21.2,
+    "description": "Netflix"
   },
   {
     "date": "2026-06-22",
     "category": "Subscriptions-Software/Digital",
-    "amount": 21.2
+    "amount": 21.2,
+    "description": "Spotify Premium"
   },
   {
     "date": "2026-06-22",
     "category": "Gifts & Donations",
-    "amount": 8
+    "amount": 8,
+    "description": "Local Charity Drive"
   },
   {
     "date": "2026-06-22",
     "category": "Groceries",
-    "amount": 26.33
+    "amount": 26.33,
+    "description": "Trader Joe's"
   },
   {
     "date": "2026-06-22",
     "category": "Utilities/Lawn Service",
-    "amount": 197.28
+    "amount": 197.28,
+    "description": "Comcast/Xfinity"
   },
   {
     "date": "2026-06-22",
     "category": "Restaurants & Dining",
-    "amount": 9.53
+    "amount": 9.53,
+    "description": "Local Bistro"
   },
   {
     "date": "2026-06-22",
     "category": "Transportation",
-    "amount": 70
+    "amount": 70,
+    "description": "EZPass Toll Charge"
   },
   {
     "date": "2026-06-22",
     "category": "Groceries",
-    "amount": 64
+    "amount": 64,
+    "description": "Safeway"
   },
   {
     "date": "2026-06-22",
     "category": "Restaurants & Dining",
-    "amount": 90.77
+    "amount": 90.77,
+    "description": "Panera Bread"
   },
   {
     "date": "2026-06-23",
     "category": "Subscriptions-Software/Digital",
-    "amount": 5
+    "amount": 5,
+    "description": "Adobe Creative Cloud"
   },
   {
     "date": "2026-06-23",
     "category": "Groceries",
-    "amount": 29.59
+    "amount": 29.59,
+    "description": "Whole Foods Market"
   },
   {
     "date": "2026-06-24",
     "category": "Family Support",
-    "amount": 900
+    "amount": 900,
+    "description": "Family Support Transfer"
   },
   {
     "date": "2026-06-24",
     "category": "Subscriptions-Software/Digital",
-    "amount": 10.59
+    "amount": 10.59,
+    "description": "Microsoft 365"
   },
   {
     "date": "2026-06-25",
     "category": "Utilities/Lawn Service",
-    "amount": 28.28
+    "amount": 28.28,
+    "description": "County Water Authority"
   },
   {
     "date": "2026-06-25",
     "category": "Shopping-General Merchandise",
-    "amount": 31.29
+    "amount": 31.29,
+    "description": "Target"
   },
   {
     "date": "2026-06-26",
     "category": "Subscriptions-Software/Digital",
-    "amount": 21.2
+    "amount": 21.2,
+    "description": "Netflix"
   },
   {
     "date": "2026-06-26",
     "category": "Shopping-General Merchandise",
-    "amount": 53.28
+    "amount": 53.28,
+    "description": "Walmart"
   },
   {
     "date": "2026-06-29",
     "category": "Rent",
-    "amount": 2150
+    "amount": 2150,
+    "description": "Property Management Co."
   },
   {
     "date": "2026-06-29",
     "category": "Travel-Lodging/Booking",
-    "amount": 6.7
+    "amount": 6.7,
+    "description": "Delta Air Lines"
   },
   {
     "date": "2026-06-29",
     "category": "Gifts & Donations",
-    "amount": 11
+    "amount": 11,
+    "description": "Etsy Gift Purchase"
   },
   {
     "date": "2026-06-29",
     "category": "Automotive-Maintenance/Registration",
-    "amount": 222.01
+    "amount": 222.01,
+    "description": "Firestone Auto Care"
   },
   {
     "date": "2026-06-29",
     "category": "Groceries",
-    "amount": 92.45
+    "amount": 92.45,
+    "description": "Giant Food"
   },
   {
     "date": "2026-06-29",
     "category": "Groceries",
-    "amount": 15.89
+    "amount": 15.89,
+    "description": "Trader Joe's"
   },
   {
     "date": "2026-06-30",
     "category": "Transportation",
-    "amount": 7.39
+    "amount": 7.39,
+    "description": "Uber"
   },
   {
     "date": "2026-06-30",
     "category": "Transportation",
-    "amount": 36.97
+    "amount": 36.97,
+    "description": "Lyft"
   },
   {
     "date": "2026-06-30",
     "category": "Transportation",
-    "amount": 70
+    "amount": 70,
+    "description": "Metro Transit Fare"
   },
   {
     "date": "2026-06-30",
     "category": "Utilities/Lawn Service",
-    "amount": 217.13
+    "amount": 217.13,
+    "description": "GreenScape Lawn Care"
   },
   {
     "date": "2026-06-30",
     "category": "Insurance",
-    "amount": 265.9
+    "amount": 265.9,
+    "description": "Geico Insurance"
   },
   {
     "date": "2026-07-01",
     "category": "Transportation",
-    "amount": 8.95
+    "amount": 8.95,
+    "description": "EZPass Toll Charge"
   },
   {
     "date": "2026-07-02",
     "category": "Gifts & Donations",
-    "amount": 23.2
+    "amount": 23.2,
+    "description": "Amazon Gift Order"
   },
   {
     "date": "2026-07-03",
     "category": "Gifts & Donations",
-    "amount": 30
+    "amount": 30,
+    "description": "Red Cross Donation"
   },
   {
     "date": "2026-07-03",
     "category": "Groceries",
-    "amount": 23.47
+    "amount": 23.47,
+    "description": "Safeway"
   },
   {
     "date": "2026-07-03",
     "category": "Automotive-Maintenance/Registration",
-    "amount": 854.39
+    "amount": 854.39,
+    "description": "Jiffy Lube"
   },
   {
     "date": "2026-07-03",
     "category": "Health",
-    "amount": 5
+    "amount": 5,
+    "description": "Family Medical Clinic"
   },
   {
     "date": "2026-07-03",
     "category": "Card Fees/Credits/Interest",
-    "amount": 30
+    "amount": 30,
+    "description": "Late Payment Fee"
   },
   {
     "date": "2026-07-03",
     "category": "Shopping-General Merchandise",
-    "amount": 190.78
+    "amount": 190.78,
+    "description": "Best Buy"
   },
   {
     "date": "2026-07-06",
     "category": "Family Support",
-    "amount": 450
+    "amount": 450,
+    "description": "Zelle to C."
   },
   {
     "date": "2026-07-06",
     "category": "Shopping-General Merchandise",
-    "amount": 44.41
+    "amount": 44.41,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-07-06",
     "category": "Shopping-General Merchandise",
-    "amount": 30.15
+    "amount": 30.15,
+    "description": "Target"
   },
   {
     "date": "2026-07-06",
     "category": "Shopping-General Merchandise",
-    "amount": 42.39
+    "amount": 42.39,
+    "description": "Walmart"
   },
   {
     "date": "2026-07-06",
     "category": "Shopping-General Merchandise",
-    "amount": 25.15
+    "amount": 25.15,
+    "description": "Best Buy"
   },
   {
     "date": "2026-07-06",
     "category": "Family Support",
-    "amount": 3000
+    "amount": 3000,
+    "description": "Zelle to F."
   },
   {
     "date": "2026-07-06",
     "category": "Automotive-Maintenance/Registration",
-    "amount": 133
+    "amount": 133,
+    "description": "DMV Registration Renewal"
   },
   {
     "date": "2026-07-07",
     "category": "Insurance",
-    "amount": 543.6
+    "amount": 543.6,
+    "description": "Allstate Homeowners Policy"
   },
   {
     "date": "2026-07-07",
     "category": "Family Support",
-    "amount": 1804.11
+    "amount": 1804.11,
+    "description": "Family Support Transfer"
   },
   {
     "date": "2026-07-07",
     "category": "Family Support",
-    "amount": 62.33
+    "amount": 62.33,
+    "description": "Zelle to C."
   },
   {
     "date": "2026-07-07",
     "category": "Shopping-General Merchandise",
-    "amount": 13.7
+    "amount": 13.7,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-07-07",
     "category": "Gifts & Donations",
-    "amount": 22
+    "amount": 22,
+    "description": "Local Charity Drive"
   },
   {
     "date": "2026-07-08",
     "category": "Health",
-    "amount": 13.4
+    "amount": 13.4,
+    "description": "Dental Associates"
   },
   {
     "date": "2026-07-09",
     "category": "Shopping-General Merchandise",
-    "amount": 28.61
+    "amount": 28.61,
+    "description": "Target"
   },
   {
     "date": "2026-07-12",
     "category": "Shopping-General Merchandise",
-    "amount": 4.95
+    "amount": 4.95,
+    "description": "Walmart"
   },
   {
     "date": "2026-07-13",
     "category": "Subscriptions-Software/Digital",
-    "amount": 0.99
+    "amount": 0.99,
+    "description": "Spotify Premium"
   },
   {
     "date": "2026-07-13",
     "category": "Local/Misc",
-    "amount": 20.91
+    "amount": 20.91,
+    "description": "Corner Pharmacy"
   },
   {
     "date": "2026-07-13",
     "category": "Cash Withdrawal",
-    "amount": 40
+    "amount": 40,
+    "description": "ATM Withdrawal - Chase"
   },
   {
     "date": "2026-07-13",
     "category": "Utilities/Lawn Service",
-    "amount": 32.47
+    "amount": 32.47,
+    "description": "Dominion Energy"
   },
   {
     "date": "2026-07-13",
     "category": "Shopping-General Merchandise",
-    "amount": 7.94
+    "amount": 7.94,
+    "description": "Best Buy"
   },
   {
     "date": "2026-07-14",
     "category": "Utilities/Lawn Service",
-    "amount": 59.03
+    "amount": 59.03,
+    "description": "Comcast/Xfinity"
   },
   {
     "date": "2026-07-14",
     "category": "Utilities/Lawn Service",
-    "amount": 222.47
+    "amount": 222.47,
+    "description": "County Water Authority"
   },
   {
     "date": "2026-07-15",
     "category": "Groceries",
-    "amount": 65.46
+    "amount": 65.46,
+    "description": "Whole Foods Market"
   },
   {
     "date": "2026-07-16",
     "category": "Cash Withdrawal",
-    "amount": 240
+    "amount": 240,
+    "description": "ATM Withdrawal - Bank of America"
   },
   {
     "date": "2026-07-16",
     "category": "Subscriptions-Software/Digital",
-    "amount": 40
+    "amount": 40,
+    "description": "Adobe Creative Cloud"
   },
   {
     "date": "2026-07-16",
     "category": "Subscriptions-Software/Digital",
-    "amount": 14.95
+    "amount": 14.95,
+    "description": "Microsoft 365"
   },
   {
     "date": "2026-07-17",
     "category": "Utilities/Lawn Service",
-    "amount": 99.78
+    "amount": 99.78,
+    "description": "GreenScape Lawn Care"
   },
   {
     "date": "2026-07-20",
     "category": "Gifts & Donations",
-    "amount": 8
+    "amount": 8,
+    "description": "Etsy Gift Purchase"
   },
   {
     "date": "2026-07-20",
     "category": "Subscriptions-Software/Digital",
-    "amount": 21.2
+    "amount": 21.2,
+    "description": "Netflix"
   },
   {
     "date": "2026-07-20",
     "category": "Subscriptions-Software/Digital",
-    "amount": 21.2
+    "amount": 21.2,
+    "description": "Spotify Premium"
   },
   {
     "date": "2026-07-20",
     "category": "Subscriptions-Software/Digital",
-    "amount": 10
+    "amount": 10,
+    "description": "Adobe Creative Cloud"
   },
   {
     "date": "2026-07-20",
     "category": "Gifts & Donations",
-    "amount": 100
+    "amount": 100,
+    "description": "Amazon Gift Order"
   },
   {
     "date": "2026-07-20",
     "category": "Utilities/Lawn Service",
-    "amount": 139.04
+    "amount": 139.04,
+    "description": "Dominion Energy"
   },
   {
     "date": "2026-07-21",
     "category": "Utilities/Lawn Service",
-    "amount": 253.3
+    "amount": 253.3,
+    "description": "Comcast/Xfinity"
   },
   {
     "date": "2026-07-22",
     "category": "Utilities/Lawn Service",
-    "amount": 74.99
+    "amount": 74.99,
+    "description": "County Water Authority"
   },
   {
     "date": "2026-07-23",
     "category": "Utilities/Lawn Service",
-    "amount": 33.02
+    "amount": 33.02,
+    "description": "GreenScape Lawn Care"
   },
   {
     "date": "2026-07-23",
     "category": "Utilities/Lawn Service",
-    "amount": 226.2
+    "amount": 226.2,
+    "description": "Dominion Energy"
   },
   {
     "date": "2026-07-23",
     "category": "Shopping-General Merchandise",
-    "amount": 12.99
+    "amount": 12.99,
+    "description": "Amazon.com"
   },
   {
     "date": "2026-07-23",
     "category": "Subscriptions-Software/Digital",
-    "amount": 5
+    "amount": 5,
+    "description": "Microsoft 365"
   },
   {
     "date": "2026-07-23",
     "category": "Shopping-General Merchandise",
-    "amount": 13.75
+    "amount": 13.75,
+    "description": "Target"
   },
   {
     "date": "2026-07-23",
     "category": "Groceries",
-    "amount": 19.44
+    "amount": 19.44,
+    "description": "Giant Food"
   },
   {
     "date": "2026-07-23",
     "category": "Transportation",
-    "amount": 2.83
+    "amount": 2.83,
+    "description": "Uber"
   },
   {
     "date": "2026-07-24",
     "category": "Subscriptions-Software/Digital",
-    "amount": 10.59
+    "amount": 10.59,
+    "description": "Netflix"
   }
 ]

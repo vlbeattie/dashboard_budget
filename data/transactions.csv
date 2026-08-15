@@ -1,0 +1,249 @@
+date,category,amount,description
+2026-04-25,Groceries,42.61,Giant Food
+2026-04-25,Restaurants & Dining,44.89,Chipotle
+2026-04-26,Shopping-General Merchandise,1.02,Amazon.com
+2026-04-26,Subscriptions-Software/Digital,21.2,Netflix
+2026-04-27,Local/Misc,25.44,Corner Pharmacy
+2026-04-27,Shopping-General Merchandise,38.4,Target
+2026-04-27,Subscriptions-Software/Digital,1.05,Spotify Premium
+2026-04-27,Rent,2150,Parkview Apartments Rent
+2026-04-28,Shopping-General Merchandise,1.7,Walmart
+2026-04-28,Shopping-General Merchandise,36.01,Best Buy
+2026-04-29,Insurance,558.9,State Farm Auto Insurance
+2026-04-29,Shopping-General Merchandise,9.52,Amazon.com
+2026-04-30,Professional/Membership Dues,20,LinkedIn Premium
+2026-04-30,Utilities/Lawn Service,0.83,Dominion Energy
+2026-04-30,Utilities/Lawn Service,181.67,Comcast/Xfinity
+2026-05-01,Travel-Lodging/Booking,52.49,Marriott Hotels
+2026-05-01,Utilities/Lawn Service,54.65,County Water Authority
+2026-05-01,Gifts & Donations,28,Amazon Gift Order
+2026-05-02,Travel-Lodging/Booking,195.5,Airbnb
+2026-05-02,Gifts & Donations,23.2,Red Cross Donation
+2026-05-02,Groceries,93.66,Trader Joe's
+2026-05-03,Travel-Lodging/Booking,195.5,Delta Air Lines
+2026-05-03,Travel-Lodging/Booking,46.07,Expedia Booking
+2026-05-04,Health,5,CVS Pharmacy
+2026-05-04,Shopping-General Merchandise,38.74,Target
+2026-05-04,Travel-Lodging/Booking,3.49,Marriott Hotels
+2026-05-04,Local/Misc,9.45,Local Hardware Store
+2026-05-04,Family Support,488.78,Family Support Transfer
+2026-05-04,Shopping-General Merchandise,42.92,Walmart
+2026-05-04,Local/Misc,31.8,Farmers Market
+2026-05-04,Local/Misc,6,Dry Cleaners
+2026-05-04,Shopping-General Merchandise,47.35,Best Buy
+2026-05-04,Childcare/Care Services,79.35,Sunshine Daycare Center
+2026-05-04,Gifts & Donations,25,Local Charity Drive
+2026-05-04,Gifts & Donations,30,Etsy Gift Purchase
+2026-05-04,Family Support,450,Zelle to C.
+2026-05-05,Taxes-Property/Local,1361.62,County Property Tax Payment
+2026-05-05,Gifts & Donations,15,Amazon Gift Order
+2026-05-05,Family Support,2918.03,Zelle to F.
+2026-05-05,Insurance,399.33,Geico Insurance
+2026-05-05,Shopping-General Merchandise,68.9,Amazon.com
+2026-05-06,Shopping-General Merchandise,63.6,Target
+2026-05-06,Groceries,14.4,Safeway
+2026-05-06,Groceries,73.72,Whole Foods Market
+2026-05-06,Groceries,23.47,Giant Food
+2026-05-07,Groceries,11.86,Trader Joe's
+2026-05-08,Professional/Membership Dues,19.73,Costco Membership
+2026-05-08,Professional/Membership Dues,115.63,Professional Assoc. Dues
+2026-05-09,Shopping-General Merchandise,0.04,Walmart
+2026-05-09,Groceries,68.8,Safeway
+2026-05-09,Shopping-General Merchandise,16.96,Best Buy
+2026-05-09,Restaurants & Dining,10,Local Bistro
+2026-05-10,Travel-Lodging/Booking,59.96,Airbnb
+2026-05-11,Health,40.55,Family Medical Clinic
+2026-05-11,Health,102.96,Dental Associates
+2026-05-11,Shopping-General Merchandise,14.45,Amazon.com
+2026-05-11,Shopping-General Merchandise,21.95,Target
+2026-05-11,Local/Misc,14.16,Corner Pharmacy
+2026-05-11,Shopping-General Merchandise,12.69,Walmart
+2026-05-11,Shopping-General Merchandise,4.47,Best Buy
+2026-05-12,Shopping-General Merchandise,4.95,Amazon.com
+2026-05-12,Subscriptions-Software/Digital,0.99,Adobe Creative Cloud
+2026-05-13,Shopping-General Merchandise,79.28,Target
+2026-05-13,Transportation,5.2,Uber
+2026-05-13,Transportation,19,Lyft
+2026-05-13,Restaurants & Dining,99.6,Panera Bread
+2026-05-13,Health,38.93,Vision Care Center
+2026-05-13,Shopping-General Merchandise,7.94,Walmart
+2026-05-15,Groceries,94.23,Whole Foods Market
+2026-05-15,Shopping-General Merchandise,12.67,Best Buy
+2026-05-15,Entertainment/Media,29,AMC Theatres
+2026-05-15,Entertainment/Media,22.26,Ticketmaster
+2026-05-15,Gifts & Donations,15,Red Cross Donation
+2026-05-16,Gifts & Donations,41,Local Charity Drive
+2026-05-16,Groceries,112.81,Giant Food
+2026-05-16,Health,515.2,CVS Pharmacy
+2026-05-16,Utilities/Lawn Service,32.47,GreenScape Lawn Care
+2026-05-17,Gifts & Donations,30,Etsy Gift Purchase
+2026-05-17,Shopping-General Merchandise,15.23,Amazon.com
+2026-05-18,Subscriptions-Software/Digital,10,Microsoft 365
+2026-05-18,Subscriptions-Software/Digital,14.95,Netflix
+2026-05-19,Utilities/Lawn Service,95.35,Dominion Energy
+2026-05-19,Home-Appliance/Repair,42.13,ABC Appliance Repair
+2026-05-19,Subscriptions-Software/Digital,21.2,Spotify Premium
+2026-05-19,Gifts & Donations,8,Amazon Gift Order
+2026-05-19,Travel-Lodging/Booking,50.9,Delta Air Lines
+2026-05-19,Subscriptions-Software/Digital,21.2,Adobe Creative Cloud
+2026-05-20,Utilities/Lawn Service,212.28,Comcast/Xfinity
+2026-05-20,Health,53,Family Medical Clinic
+2026-05-20,Subscriptions-Software/Digital,10.59,Microsoft 365
+2026-05-20,Gifts & Donations,25,Red Cross Donation
+2026-05-20,Utilities/Lawn Service,104.72,County Water Authority
+2026-05-20,Utilities/Lawn Service,59.03,GreenScape Lawn Care
+2026-05-20,Shopping-General Merchandise,51.98,Target
+2026-05-22,Card Fees/Credits/Interest,32.53,Annual Card Fee
+2026-05-22,Gifts & Donations,28,Local Charity Drive
+2026-05-22,Utilities/Lawn Service,74.99,Dominion Energy
+2026-05-22,Gifts & Donations,52.75,Etsy Gift Purchase
+2026-05-22,Card Fees/Credits/Interest,27,Interest Charge
+2026-05-23,Travel-Lodging/Booking,564.3,Expedia Booking
+2026-05-26,Subscriptions-Software/Digital,5,Netflix
+2026-05-26,Professional/Membership Dues,115.63,LinkedIn Premium
+2026-05-26,Health,16.72,Dental Associates
+2026-05-26,Professional/Membership Dues,19.73,Costco Membership
+2026-05-26,Groceries,49.95,Trader Joe's
+2026-05-26,Subscriptions-Software/Digital,10.59,Spotify Premium
+2026-05-26,Subscriptions-Software/Digital,21.2,Adobe Creative Cloud
+2026-05-26,Groceries,51.76,Safeway
+2026-05-26,Subscriptions-Software/Digital,9.22,Microsoft 365
+2026-05-27,Groceries,564.12,Whole Foods Market
+2026-05-27,Utilities/Lawn Service,61.34,Comcast/Xfinity
+2026-05-27,Gifts & Donations,44,Amazon Gift Order
+2026-05-28,Cash Withdrawal,220,ATM Withdrawal - Chase
+2026-05-28,Utilities/Lawn Service,217.13,County Water Authority
+2026-05-29,Insurance,265.9,Allstate Homeowners Policy
+2026-05-29,Utilities/Lawn Service,44.06,GreenScape Lawn Care
+2026-05-29,Family Support,2.99,Family Support Transfer
+2026-05-29,Rent,2150,Landlord ACH Payment
+2026-05-30,Shopping-General Merchandise,18.01,Walmart
+2026-05-30,Shopping-General Merchandise,79.5,Best Buy
+2026-05-30,Shopping-General Merchandise,19.07,Amazon.com
+2026-05-31,Shopping-General Merchandise,188.28,Target
+2026-06-01,Professional/Membership Dues,16.84,Professional Assoc. Dues
+2026-06-01,Local/Misc,35,Local Hardware Store
+2026-06-01,Gifts & Donations,44,Red Cross Donation
+2026-06-01,Shopping-General Merchandise,25.25,Walmart
+2026-06-01,Local/Misc,18.02,Farmers Market
+2026-06-01,Gifts & Donations,10,Local Charity Drive
+2026-06-02,Family Support,450,Zelle to C.
+2026-06-02,Gifts & Donations,23.2,Etsy Gift Purchase
+2026-06-02,Shopping-General Merchandise,13.08,Best Buy
+2026-06-02,Family Support,1594.34,Zelle to F.
+2026-06-02,Gifts & Donations,50,Amazon Gift Order
+2026-06-03,Gifts & Donations,30,Red Cross Donation
+2026-06-03,Health,5,Vision Care Center
+2026-06-03,Automotive-Maintenance/Registration,402.79,Jiffy Lube
+2026-06-03,Shopping-General Merchandise,51.25,Amazon.com
+2026-06-03,Automotive-Maintenance/Registration,284.2,DMV Registration Renewal
+2026-06-04,Shopping-General Merchandise,8.49,Target
+2026-06-04,Shopping-General Merchandise,4.11,Walmart
+2026-06-05,Insurance,399.33,State Farm Auto Insurance
+2026-06-05,Shopping-General Merchandise,34.96,Best Buy
+2026-06-05,Health,100,CVS Pharmacy
+2026-06-08,Restaurants & Dining,95,Sushi House
+2026-06-08,Transportation,14.99,Metro Transit Fare
+2026-06-08,Transportation,18.13,EZPass Toll Charge
+2026-06-09,Travel-Lodging/Booking,7.05,Marriott Hotels
+2026-06-10,Shopping-General Merchandise,84.78,Amazon.com
+2026-06-10,Shopping-General Merchandise,32.4,Target
+2026-06-11,Shopping-General Merchandise,42.39,Walmart
+2026-06-12,Subscriptions-Software/Digital,0.99,Netflix
+2026-06-12,Shopping-General Merchandise,4.95,Best Buy
+2026-06-13,Shopping-General Merchandise,7.94,Amazon.com
+2026-06-15,Groceries,129.14,Giant Food
+2026-06-15,Cash Withdrawal,260,ATM Withdrawal - Bank of America
+2026-06-15,Transportation,70,Uber
+2026-06-15,Local/Misc,25,Dry Cleaners
+2026-06-15,Transportation,70,Lyft
+2026-06-16,Subscriptions-Software/Digital,14.95,Spotify Premium
+2026-06-17,Subscriptions-Software/Digital,6,Adobe Creative Cloud
+2026-06-17,Utilities/Lawn Service,125.11,Dominion Energy
+2026-06-17,Utilities/Lawn Service,59.03,Comcast/Xfinity
+2026-06-18,Utilities/Lawn Service,98.58,County Water Authority
+2026-06-18,Utilities/Lawn Service,32.47,GreenScape Lawn Care
+2026-06-18,Subscriptions-Software/Digital,10,Microsoft 365
+2026-06-19,Travel-Lodging/Booking,30,Airbnb
+2026-06-20,Restaurants & Dining,72.62,Chipotle
+2026-06-22,Transportation,125,Metro Transit Fare
+2026-06-22,Utilities/Lawn Service,74.99,Dominion Energy
+2026-06-22,Subscriptions-Software/Digital,21.2,Netflix
+2026-06-22,Subscriptions-Software/Digital,21.2,Spotify Premium
+2026-06-22,Gifts & Donations,8,Local Charity Drive
+2026-06-22,Groceries,26.33,Trader Joe's
+2026-06-22,Utilities/Lawn Service,197.28,Comcast/Xfinity
+2026-06-22,Restaurants & Dining,9.53,Local Bistro
+2026-06-22,Transportation,70,EZPass Toll Charge
+2026-06-22,Groceries,64,Safeway
+2026-06-22,Restaurants & Dining,90.77,Panera Bread
+2026-06-23,Subscriptions-Software/Digital,5,Adobe Creative Cloud
+2026-06-23,Groceries,29.59,Whole Foods Market
+2026-06-24,Family Support,900,Family Support Transfer
+2026-06-24,Subscriptions-Software/Digital,10.59,Microsoft 365
+2026-06-25,Utilities/Lawn Service,28.28,County Water Authority
+2026-06-25,Shopping-General Merchandise,31.29,Target
+2026-06-26,Subscriptions-Software/Digital,21.2,Netflix
+2026-06-26,Shopping-General Merchandise,53.28,Walmart
+2026-06-29,Rent,2150,Property Management Co.
+2026-06-29,Travel-Lodging/Booking,6.7,Delta Air Lines
+2026-06-29,Gifts & Donations,11,Etsy Gift Purchase
+2026-06-29,Automotive-Maintenance/Registration,222.01,Firestone Auto Care
+2026-06-29,Groceries,92.45,Giant Food
+2026-06-29,Groceries,15.89,Trader Joe's
+2026-06-30,Transportation,7.39,Uber
+2026-06-30,Transportation,36.97,Lyft
+2026-06-30,Transportation,70,Metro Transit Fare
+2026-06-30,Utilities/Lawn Service,217.13,GreenScape Lawn Care
+2026-06-30,Insurance,265.9,Geico Insurance
+2026-07-01,Transportation,8.95,EZPass Toll Charge
+2026-07-02,Gifts & Donations,23.2,Amazon Gift Order
+2026-07-03,Gifts & Donations,30,Red Cross Donation
+2026-07-03,Groceries,23.47,Safeway
+2026-07-03,Automotive-Maintenance/Registration,854.39,Jiffy Lube
+2026-07-03,Health,5,Family Medical Clinic
+2026-07-03,Card Fees/Credits/Interest,30,Late Payment Fee
+2026-07-03,Shopping-General Merchandise,190.78,Best Buy
+2026-07-06,Family Support,450,Zelle to C.
+2026-07-06,Shopping-General Merchandise,44.41,Amazon.com
+2026-07-06,Shopping-General Merchandise,30.15,Target
+2026-07-06,Shopping-General Merchandise,42.39,Walmart
+2026-07-06,Shopping-General Merchandise,25.15,Best Buy
+2026-07-06,Family Support,3000,Zelle to F.
+2026-07-06,Automotive-Maintenance/Registration,133,DMV Registration Renewal
+2026-07-07,Insurance,543.6,Allstate Homeowners Policy
+2026-07-07,Family Support,1804.11,Family Support Transfer
+2026-07-07,Family Support,62.33,Zelle to C.
+2026-07-07,Shopping-General Merchandise,13.7,Amazon.com
+2026-07-07,Gifts & Donations,22,Local Charity Drive
+2026-07-08,Health,13.4,Dental Associates
+2026-07-09,Shopping-General Merchandise,28.61,Target
+2026-07-12,Shopping-General Merchandise,4.95,Walmart
+2026-07-13,Subscriptions-Software/Digital,0.99,Spotify Premium
+2026-07-13,Local/Misc,20.91,Corner Pharmacy
+2026-07-13,Cash Withdrawal,40,ATM Withdrawal - Chase
+2026-07-13,Utilities/Lawn Service,32.47,Dominion Energy
+2026-07-13,Shopping-General Merchandise,7.94,Best Buy
+2026-07-14,Utilities/Lawn Service,59.03,Comcast/Xfinity
+2026-07-14,Utilities/Lawn Service,222.47,County Water Authority
+2026-07-15,Groceries,65.46,Whole Foods Market
+2026-07-16,Cash Withdrawal,240,ATM Withdrawal - Bank of America
+2026-07-16,Subscriptions-Software/Digital,40,Adobe Creative Cloud
+2026-07-16,Subscriptions-Software/Digital,14.95,Microsoft 365
+2026-07-17,Utilities/Lawn Service,99.78,GreenScape Lawn Care
+2026-07-20,Gifts & Donations,8,Etsy Gift Purchase
+2026-07-20,Subscriptions-Software/Digital,21.2,Netflix
+2026-07-20,Subscriptions-Software/Digital,21.2,Spotify Premium
+2026-07-20,Subscriptions-Software/Digital,10,Adobe Creative Cloud
+2026-07-20,Gifts & Donations,100,Amazon Gift Order
+2026-07-20,Utilities/Lawn Service,139.04,Dominion Energy
+2026-07-21,Utilities/Lawn Service,253.3,Comcast/Xfinity
+2026-07-22,Utilities/Lawn Service,74.99,County Water Authority
+2026-07-23,Utilities/Lawn Service,33.02,GreenScape Lawn Care
+2026-07-23,Utilities/Lawn Service,226.2,Dominion Energy
+2026-07-23,Shopping-General Merchandise,12.99,Amazon.com
+2026-07-23,Subscriptions-Software/Digital,5,Microsoft 365
+2026-07-23,Shopping-General Merchandise,13.75,Target
+2026-07-23,Groceries,19.44,Giant Food
+2026-07-23,Transportation,2.83,Uber
+2026-07-24,Subscriptions-Software/Digital,10.59,Netflix

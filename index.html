@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/styles.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen">
   <header class="bg-white border-b border-slate-200">
@@ -28,6 +29,30 @@
     </div>
 
     <div id="chart-error" class="hidden bg-red-50 text-red-700 border border-red-200 rounded-md px-4 py-3 text-sm"></div>
+
+    <section class="bg-white rounded-lg border border-slate-200 p-4 space-y-3">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-700">Upload your own data</h2>
+        <p class="text-sm text-slate-500 mt-0.5">
+          Upload a CSV with <code class="bg-slate-100 text-slate-800 px-1 rounded">date</code>,
+          <code class="bg-slate-100 text-slate-800 px-1 rounded">category</code>, and
+          <code class="bg-slate-100 text-slate-800 px-1 rounded">amount</code> columns (extra columns
+          are fine and will be kept). This replaces the chart's data for this browser
+          session only — reload the page to go back to the sample data.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <label for="csv-upload" class="sr-only">Upload a CSV file of transactions</label>
+        <input
+          type="file"
+          id="csv-upload"
+          accept=".csv,text/csv"
+          aria-describedby="csv-upload-status"
+          class="text-sm text-slate-700 file:mr-3 file:px-3 file:py-1.5 file:rounded-md file:border-0 file:bg-slate-900 file:text-white file:text-sm file:font-medium hover:file:bg-slate-700 file:cursor-pointer cursor-pointer"
+        />
+      </div>
+      <div id="csv-upload-status" role="status" class="hidden text-sm rounded-md px-3 py-2"></div>
+    </section>
 
     <section class="bg-white rounded-lg border border-slate-200 p-4 space-y-3">
       <div class="flex flex-wrap gap-2">

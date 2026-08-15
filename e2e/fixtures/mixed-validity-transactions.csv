@@ -1,0 +1,5 @@
+date,category,amount,description
+2026-06-01,Groceries,50.00,Weekly shop
+not-a-date,Rent,1500.00,June rent
+2026-06-10,Entertainment,not-a-number,Movie night
+2026-06-15,Health,30.00,Pharmacy
