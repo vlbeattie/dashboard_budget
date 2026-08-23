@@ -80,6 +80,17 @@ export function aggregateByCategory(transactions) {
 }
 
 /**
+ * Returns the transactions matching `category` exactly, sorted by date
+ * descending (most recent first). Used to drill down into a single
+ * category's transactions (e.g. after clicking a pie slice or legend row).
+ */
+export function getTransactionsForCategory(transactions, category) {
+  return transactions
+    .filter((t) => t.category === category)
+    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+}
+
+/**
  * Groups categories that individually make up less than OTHER_THRESHOLD of
  * the grand total into a single "Other" entry.
  * @returns {{ slices: Array<{category, total}>, otherBreakdown: Array<{category, total}>, grandTotal: number }}

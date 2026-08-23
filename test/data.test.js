@@ -6,6 +6,7 @@ import {
   getPresetRange,
   aggregateByCategory,
   groupSmallCategories,
+  getTransactionsForCategory,
 } from "../js/data.js";
 
 const fixture = [
@@ -118,5 +119,25 @@ describe("groupSmallCategories", () => {
   test("handles an empty input without dividing by zero", () => {
     const result = groupSmallCategories([]);
     assert.deepEqual(result, { slices: [], otherBreakdown: [], grandTotal: 0 });
+  });
+});
+
+describe("getTransactionsForCategory", () => {
+  test("returns only matching transactions, sorted by date descending", () => {
+    const result = getTransactionsForCategory(fixture, "Rent");
+    assert.deepEqual(
+      result.map((t) => t.date),
+      ["2026-03-20", "2026-02-01"]
+    );
+  });
+
+  test("returns an empty array when the category has no transactions", () => {
+    assert.deepEqual(getTransactionsForCategory(fixture, "Nonexistent"), []);
+  });
+
+  test("does not mutate the input array", () => {
+    const copy = [...fixture];
+    getTransactionsForCategory(fixture, "Groceries");
+    assert.deepEqual(fixture, copy);
   });
 });

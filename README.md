@@ -13,6 +13,10 @@ from a local JSON file in the browser. Designed to be deployed on GitHub Pages.
   - Categories that individually make up less than 2% of the total for the selected
     range are grouped into a single "Other" slice, with a breakdown table below the
     chart showing what's included.
+  - Click a pie slice or a category name in the legend (or in the "Other" breakdown
+    list) to see that category's individual transactions in a table below the chart.
+    Click the same slice/row again, or use the "× Clear selection" link, to close it.
+    Changing the date range clears any active selection.
   - You can upload your own CSV of transactions to replace the chart's data for the
     current browser session (see "Uploading your own data" below).
 
@@ -153,19 +157,24 @@ html-validate checks HTML structure/semantics.
 (e.g. color contrast, missing labels, ARIA misuse). The pie chart `<canvas>` also has
 an `aria-label` since Chart.js canvases have no built-in text alternative — the
 legend list below the chart serves as the accessible, screen-reader-friendly detail
-view. Automated checks don't catch everything, so it's still worth manually verifying
-keyboard navigation (tab through preset buttons and date inputs) and focus visibility
-when adding new UI.
+view. The legend, "Other" breakdown, and clear-selection controls are real `<button>`
+elements with `aria-pressed` state so the category drill-down feature is keyboard-
+and screen-reader-accessible too. Automated checks don't catch everything, so it's
+still worth manually verifying keyboard navigation (tab through preset buttons and
+date inputs) and focus visibility when adding new UI.
 
 **Tests**: `test/data.test.js` unit-tests the pure data functions in `js/data.js`
-(date filtering, category aggregation, "Other" grouping, preset date ranges) and
-`test/csv.test.js` unit-tests the CSV parsing/validation logic in `js/csv.js` (date/amount
-normalization, missing-column detection, invalid-row skipping) — both use Node's
-built-in test runner. `e2e/spending-by-category.spec.js` and `e2e/csv-upload.spec.js`
-use Playwright to drive a real browser against the page (served locally via
-`http-server`, started automatically by the Playwright config) and verify the chart,
-presets, custom date filtering, "Other" breakdown, and CSV upload (valid files,
-partially-invalid files, and files missing required columns) all work end-to-end.
+(date filtering, category aggregation, "Other" grouping, preset date ranges, and
+per-category transaction lookup/sorting) and `test/csv.test.js` unit-tests the CSV
+parsing/validation logic in `js/csv.js` (date/amount normalization, missing-column
+detection, invalid-row skipping) — both use Node's built-in test runner.
+`e2e/spending-by-category.spec.js`, `e2e/category-drilldown.spec.js`, and
+`e2e/csv-upload.spec.js` use Playwright to drive a real browser against the page
+(served locally via `http-server`, started automatically by the Playwright config)
+and verify the chart, presets, custom date filtering, "Other" breakdown, clicking a
+slice/legend row/"Other" row to view and clear a category's transaction detail, and
+CSV upload (valid files, partially-invalid files, and files missing required
+columns) all work end-to-end.
 
 **CI**: `.github/workflows/ci.yml` runs `npm run lint`, `npm run test:unit`, and
 `npm run test:e2e` on every push and pull request.

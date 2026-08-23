@@ -6,6 +6,7 @@ import {
   getPresetRange,
   aggregateByCategory,
   groupSmallCategories,
+  getTransactionsForCategory,
 } from "../data.js";
 import { parseTransactionsCsv } from "../csv.js";
 
@@ -15,9 +16,24 @@ const PALETTE = [
   "#0d9488", "#c026d3",
 ];
 const OTHER_COLOR = "#94a3b8";
+const DIMMED_COLOR = "#e2e8f0";
+const SELECTED_OFFSET = 18;
 
 let allTransactions = [];
 let chart = null;
+
+// State for the currently filtered/aggregated view, kept so click handlers
+// (fired later, asynchronously) can access it without recomputing.
+let currentFiltered = [];
+let currentSlices = [];
+let currentOtherBreakdown = [];
+let currentGrandTotal = 0;
+
+// Category currently emphasized on the pie chart (a main category or "Other").
+let selectedSliceCategory = null;
+// Category whose transactions are shown in the detail table below (null when
+// "Other" itself is selected, since it isn't a real category).
+let selectedDetailCategory = null;
 
 function formatCurrency(value) {
   return value.toLocaleString(undefined, { style: "currency", currency: "USD" });
@@ -27,11 +43,21 @@ function colorForIndex(category, index) {
   return category === "Other" ? OTHER_COLOR : PALETTE[index % PALETTE.length];
 }
 
+/** Color used for a pie slice: the real category color, dimmed to gray if
+ * another category is currently selected. */
+function sliceColor(category, index) {
+  if (selectedSliceCategory && category !== selectedSliceCategory) {
+    return DIMMED_COLOR;
+  }
+  return colorForIndex(category, index);
+}
+
 function renderChart(slices) {
   const ctx = document.getElementById("category-pie-chart").getContext("2d");
   const labels = slices.map((s) => s.category);
   const data = slices.map((s) => s.total);
-  const colors = slices.map((s, i) => colorForIndex(s.category, i));
+  const colors = slices.map((s, i) => sliceColor(s.category, i));
+  const offsets = slices.map((s) => (s.category === selectedSliceCategory ? SELECTED_OFFSET : 0));
 
   if (chart) {
     chart.destroy();
@@ -41,10 +67,20 @@ function renderChart(slices) {
     type: "pie",
     data: {
       labels,
-      datasets: [{ data, backgroundColor: colors, borderWidth: 1, borderColor: "#ffffff" }],
+      datasets: [
+        { data, backgroundColor: colors, offset: offsets, borderWidth: 1, borderColor: "#ffffff" },
+      ],
     },
     options: {
       responsive: true,
+      onClick: (_evt, elements) => {
+        if (elements.length === 0) return;
+        const clicked = currentSlices[elements[0].index];
+        if (clicked) selectCategory(clicked.category);
+      },
+      onHover: (evt, elements) => {
+        evt.native.target.style.cursor = elements.length > 0 ? "pointer" : "default";
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -63,15 +99,23 @@ function renderLegend(slices, grandTotal) {
 
   slices.forEach((slice, i) => {
     const pct = grandTotal > 0 ? ((slice.total / grandTotal) * 100).toFixed(1) : "0.0";
+    const isSelected = slice.category === selectedSliceCategory;
     const row = document.createElement("li");
-    row.className = "flex items-center justify-between gap-3 py-1.5 text-sm";
+    row.className = "py-0.5";
     row.innerHTML = `
-      <span class="flex items-center gap-2 min-w-0">
-        <span class="legend-swatch" style="background-color: ${colorForIndex(slice.category, i)}"></span>
-        <span class="truncate">${slice.category}</span>
-      </span>
-      <span class="text-slate-600 whitespace-nowrap">${formatCurrency(slice.total)} <span class="text-slate-500">(${pct}%)</span></span>
+      <button
+        type="button"
+        class="w-full flex items-center justify-between gap-3 py-1 px-1 -mx-1 rounded text-sm text-left hover:bg-slate-50 transition-colors ${isSelected ? "font-semibold bg-slate-50" : ""}"
+        aria-pressed="${isSelected}"
+      >
+        <span class="flex items-center gap-2 min-w-0">
+          <span class="legend-swatch" style="background-color: ${colorForIndex(slice.category, i)}"></span>
+          <span class="truncate">${slice.category}</span>
+        </span>
+        <span class="text-slate-600 whitespace-nowrap">${formatCurrency(slice.total)} <span class="text-slate-500">(${pct}%)</span></span>
+      </button>
     `;
+    row.querySelector("button").addEventListener("click", () => selectCategory(slice.category));
     legendEl.appendChild(row);
   });
 }
@@ -93,9 +137,20 @@ function renderOtherBreakdown(otherBreakdown, grandTotal) {
     .sort((a, b) => b.total - a.total)
     .forEach((entry) => {
       const pct = grandTotal > 0 ? ((entry.total / grandTotal) * 100).toFixed(1) : "0.0";
+      const isSelected = entry.category === selectedDetailCategory;
       const row = document.createElement("li");
-      row.className = "flex items-center justify-between gap-3 py-1 text-sm text-slate-600";
-      row.innerHTML = `<span class="truncate">${entry.category}</span><span class="whitespace-nowrap">${formatCurrency(entry.total)} (${pct}%)</span>`;
+      row.className = "py-0.5";
+      row.innerHTML = `
+        <button
+          type="button"
+          class="w-full flex items-center justify-between gap-3 py-1 px-1 -mx-1 rounded text-sm text-left text-slate-600 hover:bg-slate-50 transition-colors ${isSelected ? "font-semibold bg-slate-50 text-slate-900" : ""}"
+          aria-pressed="${isSelected}"
+        >
+          <span class="truncate">${entry.category}</span>
+          <span class="whitespace-nowrap">${formatCurrency(entry.total)} (${pct}%)</span>
+        </button>
+      `;
+      row.querySelector("button").addEventListener("click", () => selectOtherChild(entry.category));
       list.appendChild(row);
     });
 }
@@ -106,15 +161,99 @@ function renderTotal(grandTotal, count) {
     `${count} transaction${count === 1 ? "" : "s"}`;
 }
 
-function renderForRange(start, end) {
-  const filtered = filterByDateRange(allTransactions, start, end);
-  const aggregated = aggregateByCategory(filtered);
-  const { slices, otherBreakdown, grandTotal } = groupSmallCategories(aggregated);
+function escapeHtml(value) {
+  const div = document.createElement("div");
+  div.textContent = value;
+  return div.innerHTML;
+}
 
-  renderChart(slices);
-  renderLegend(slices, grandTotal);
-  renderOtherBreakdown(otherBreakdown, grandTotal);
-  renderTotal(grandTotal, filtered.length);
+function renderCategoryDetail() {
+  const section = document.getElementById("category-detail-section");
+
+  if (!selectedDetailCategory) {
+    section.classList.add("hidden");
+    document.getElementById("category-detail-rows").innerHTML = "";
+    return;
+  }
+
+  const transactions = getTransactionsForCategory(currentFiltered, selectedDetailCategory);
+  const total = transactions.reduce((sum, t) => sum + t.amount, 0);
+
+  document.getElementById("category-detail-title").textContent =
+    `${selectedDetailCategory} — ${transactions.length} transaction${transactions.length === 1 ? "" : "s"}, ${formatCurrency(total)} total`;
+
+  const rowsEl = document.getElementById("category-detail-rows");
+  rowsEl.innerHTML = transactions
+    .map(
+      (t) => `
+        <tr>
+          <td class="py-1.5 pr-4 whitespace-nowrap">${t.date}</td>
+          <td class="py-1.5 pr-4">${t.description ? escapeHtml(t.description) : "—"}</td>
+          <td class="py-1.5 text-right whitespace-nowrap">${formatCurrency(t.amount)}</td>
+        </tr>
+      `
+    )
+    .join("");
+
+  section.classList.remove("hidden");
+}
+
+/** Selects (or, if already selected, deselects) a top-level pie slice's category. */
+function selectCategory(category) {
+  const alreadySelected = selectedSliceCategory === category && selectedDetailCategory === category;
+  if (alreadySelected) {
+    clearSelection();
+    return;
+  }
+
+  selectedSliceCategory = category;
+  selectedDetailCategory = category === "Other" ? null : category;
+  rerenderSelectionDependentUI();
+}
+
+/** Selects (or deselects) a category grouped inside the "Other" slice. */
+function selectOtherChild(category) {
+  const alreadySelected = selectedDetailCategory === category;
+  if (alreadySelected) {
+    clearSelection();
+    return;
+  }
+
+  selectedSliceCategory = "Other";
+  selectedDetailCategory = category;
+  rerenderSelectionDependentUI();
+}
+
+function clearSelection() {
+  selectedSliceCategory = null;
+  selectedDetailCategory = null;
+  rerenderSelectionDependentUI();
+}
+
+/** Re-renders everything whose appearance depends on the current selection. */
+function rerenderSelectionDependentUI() {
+  renderChart(currentSlices);
+  renderLegend(currentSlices, currentGrandTotal);
+  renderOtherBreakdown(currentOtherBreakdown, currentGrandTotal);
+  renderCategoryDetail();
+}
+
+function renderForRange(start, end) {
+  currentFiltered = filterByDateRange(allTransactions, start, end);
+  const aggregated = aggregateByCategory(currentFiltered);
+  const grouped = groupSmallCategories(aggregated);
+  currentSlices = grouped.slices;
+  currentOtherBreakdown = grouped.otherBreakdown;
+  currentGrandTotal = grouped.grandTotal;
+
+  selectedSliceCategory = null;
+  selectedDetailCategory = null;
+
+  renderChart(currentSlices);
+  renderLegend(currentSlices, currentGrandTotal);
+  renderOtherBreakdown(currentOtherBreakdown, currentGrandTotal);
+  renderCategoryDetail();
+  renderTotal(currentGrandTotal, currentFiltered.length);
 }
 
 function setActivePreset(activeBtn) {
@@ -172,6 +311,7 @@ function attachEventListeners() {
   endInput.addEventListener("change", onCustomDateChange);
 
   document.getElementById("csv-upload").addEventListener("change", handleCsvUpload);
+  document.getElementById("clear-category-selection").addEventListener("click", clearSelection);
 }
 
 /** (Re-)applies the current dataset's date bounds and shows the "All Time" view. */
