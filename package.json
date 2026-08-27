@@ -5,8 +5,9 @@
   "description": "Static budget dashboard (HTML/Tailwind CDN/Chart.js) with linting and tests.",
   "type": "module",
   "scripts": {
+    "generate:category-rules": "node scripts/generate-category-rules.mjs",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
-    "lint:js": "eslint js/ test/ e2e/",
+    "lint:js": "eslint js/ test/ e2e/ scripts/",
     "lint:css": "stylelint \"css/**/*.css\"",
     "lint:html": "html-validate index.html",
     "test:unit": "node --test",

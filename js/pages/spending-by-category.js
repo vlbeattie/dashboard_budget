@@ -9,6 +9,8 @@ import {
   getTransactionsForCategory,
 } from "../data.js";
 import { parseTransactionsCsv } from "../csv.js";
+import { suggestCategoriesForReview, UNCATEGORIZED } from "../categorize.js";
+import { CATEGORY_RULES } from "../category-rules.js";
 
 const PALETTE = [
   "#2563eb", "#dc2626", "#16a34a", "#d97706", "#7c3aed",
@@ -34,6 +36,12 @@ let selectedSliceCategory = null;
 // Category whose transactions are shown in the detail table below (null when
 // "Other" itself is selected, since it isn't a real category).
 let selectedDetailCategory = null;
+
+// Parsed transactions awaiting category review after a CSV upload (rows with
+// blank categories still need a user-confirmed value before being applied).
+let pendingReviewTransactions = null;
+let pendingReviewFileName = "";
+let pendingReviewWarnings = [];
 
 function formatCurrency(value) {
   return value.toLocaleString(undefined, { style: "currency", currency: "USD" });
@@ -312,6 +320,8 @@ function attachEventListeners() {
 
   document.getElementById("csv-upload").addEventListener("change", handleCsvUpload);
   document.getElementById("clear-category-selection").addEventListener("click", clearSelection);
+  document.getElementById("apply-category-review").addEventListener("click", applyCategoryReview);
+  document.getElementById("cancel-category-review").addEventListener("click", cancelCategoryReview);
 }
 
 /** (Re-)applies the current dataset's date bounds and shows the "All Time" view. */
@@ -344,6 +354,103 @@ function showCsvStatus(message, variant) {
   el.classList.remove("hidden");
 }
 
+function getKnownCategories(transactions) {
+  const known = new Set(CATEGORY_RULES.map((rule) => rule.category));
+  for (const t of transactions) {
+    if (t.category) known.add(t.category);
+  }
+  known.delete(UNCATEGORIZED);
+  return [...known].sort((a, b) => a.localeCompare(b)).concat(UNCATEGORIZED);
+}
+
+function renderCategoryReview(transactions, reviewRows) {
+  const section = document.getElementById("category-review-section");
+  const rowsEl = document.getElementById("category-review-rows");
+  const summaryEl = document.getElementById("category-review-summary");
+
+  const categories = getKnownCategories(transactions);
+  const matchedCount = reviewRows.filter((r) => r.suggestion).length;
+
+  summaryEl.textContent =
+    `${reviewRows.length} row${reviewRows.length === 1 ? "" : "s"} have no category. ` +
+    `${matchedCount} got an automatic suggestion based on the description — review and adjust as ` +
+    `needed, then apply.`;
+
+  rowsEl.innerHTML = reviewRows
+    .map(({ index, transaction, suggestion }) => {
+      const selected = suggestion ? suggestion.category : UNCATEGORIZED;
+      const description = transaction.description ? escapeHtml(transaction.description) : "—";
+      const options = categories
+        .map(
+          (cat) =>
+            `<option value="${escapeHtml(cat)}" ${cat === selected ? "selected" : ""}>${escapeHtml(cat)}</option>`
+        )
+        .join("");
+
+      return `
+        <tr>
+          <td class="py-1.5 pr-4 pl-3 whitespace-nowrap">${transaction.date}</td>
+          <td class="py-1.5 pr-4">${description}</td>
+          <td class="py-1.5 pr-4 text-right whitespace-nowrap">${formatCurrency(transaction.amount)}</td>
+          <td class="py-1.5 pr-3">
+            <select
+              data-transaction-index="${index}"
+              aria-label="Category for ${description} on ${transaction.date}"
+              class="border border-slate-300 rounded-md px-2 py-1 text-sm"
+            >
+              ${options}
+            </select>
+          </td>
+        </tr>
+      `;
+    })
+    .join("");
+
+  section.classList.remove("hidden");
+}
+
+function hideCategoryReview() {
+  document.getElementById("category-review-section").classList.add("hidden");
+  document.getElementById("category-review-rows").innerHTML = "";
+  pendingReviewTransactions = null;
+  pendingReviewFileName = "";
+  pendingReviewWarnings = [];
+}
+
+function applyCategoryReview() {
+  if (!pendingReviewTransactions) return;
+
+  document.querySelectorAll("#category-review-rows select[data-transaction-index]").forEach((select) => {
+    const index = Number(select.dataset.transactionIndex);
+    pendingReviewTransactions[index].category = select.value;
+  });
+
+  finalizeCsvImport(pendingReviewTransactions, pendingReviewFileName, pendingReviewWarnings);
+  hideCategoryReview();
+}
+
+function cancelCategoryReview() {
+  hideCategoryReview();
+  showCsvStatus("Upload cancelled — the previous data is unchanged.", "warning");
+}
+
+function finalizeCsvImport(transactions, fileName, warnings) {
+  allTransactions = transactions;
+  resetDateControlsAndDefaultView();
+
+  if (warnings.length > 0) {
+    showCsvStatus(
+      `Loaded ${transactions.length} transaction(s) from "${fileName}", but skipped ${warnings.length} row(s): ${warnings.join(" ")}`,
+      "warning"
+    );
+  } else {
+    showCsvStatus(
+      `Loaded ${transactions.length} transaction(s) from "${fileName}". This replaces the sample data until you reload the page.`,
+      "success"
+    );
+  }
+}
+
 async function handleCsvUpload(event) {
   const input = event.target;
   const file = input.files && input.files[0];
@@ -358,20 +465,21 @@ async function handleCsvUpload(event) {
       return;
     }
 
-    allTransactions = transactions;
-    resetDateControlsAndDefaultView();
-
-    if (warnings.length > 0) {
+    const reviewRows = suggestCategoriesForReview(transactions);
+    if (reviewRows.length > 0) {
+      pendingReviewTransactions = transactions;
+      pendingReviewFileName = file.name;
+      pendingReviewWarnings = warnings;
+      renderCategoryReview(transactions, reviewRows);
       showCsvStatus(
-        `Loaded ${transactions.length} transaction(s) from "${file.name}", but skipped ${warnings.length} row(s): ${warnings.join(" ")}`,
+        `Parsed "${file.name}" — ${reviewRows.length} row(s) need a category. Review the suggestions ` +
+          `below, then click "Apply categories and load data".`,
         "warning"
       );
-    } else {
-      showCsvStatus(
-        `Loaded ${transactions.length} transaction(s) from "${file.name}". This replaces the sample data until you reload the page.`,
-        "success"
-      );
+      return;
     }
+
+    finalizeCsvImport(transactions, file.name, warnings);
   } catch (err) {
     console.error(err);
     showCsvStatus(`Could not read "${file.name}" as a CSV file. See console for details.`, "error");

@@ -42,4 +42,59 @@ test.describe("CSV upload", () => {
     await expect(status).toContainText("date");
     await expect(page.locator("#total-count")).toContainText(totalBefore);
   });
+
+  test("uploading a CSV with no category column shows a review table with suggestions", async ({ page }) => {
+    await page.goto("/index.html");
+
+    await page.locator("#csv-upload").setInputFiles(fixture("missing-category-transactions.csv"));
+
+    const review = page.locator("#category-review-section");
+    await expect(review).toBeVisible();
+    await expect(page.locator("#category-review-summary")).toContainText("3 rows have no category");
+
+    const rows = page.locator("#category-review-rows tr");
+    await expect(rows).toHaveCount(3);
+
+    // A recognized merchant should be pre-selected with its suggested category.
+    await expect(rows.nth(0).locator("select")).toHaveValue("Groceries");
+    await expect(rows.nth(1).locator("select")).toHaveValue("Transportation");
+    // An unrecognized merchant should default to "Uncategorized".
+    await expect(rows.nth(2).locator("select")).toHaveValue("Uncategorized");
+
+    // The chart shouldn't be replaced until the user applies the review.
+    await expect(page.locator("#total-count")).not.toContainText("3 transactions");
+  });
+
+  test("applying the category review loads the data with chosen categories", async ({ page }) => {
+    await page.goto("/index.html");
+
+    await page.locator("#csv-upload").setInputFiles(fixture("missing-category-transactions.csv"));
+
+    const rows = page.locator("#category-review-rows tr");
+    await rows.nth(2).locator("select").selectOption("Local/Misc");
+
+    await page.locator("#apply-category-review").click();
+
+    await expect(page.locator("#category-review-section")).toBeHidden();
+    await expect(page.locator("#csv-upload-status")).toContainText("Loaded 3 transaction(s)");
+    await expect(page.locator("#total-count")).toContainText("3 transactions");
+
+    const legendCategories = await page.locator("#category-legend li span.truncate").allTextContents();
+    expect(legendCategories).toContain("Local/Misc");
+  });
+
+  test("cancelling the category review discards the upload", async ({ page }) => {
+    await page.goto("/index.html");
+
+    const totalBefore = await page.locator("#total-count").textContent();
+
+    await page.locator("#csv-upload").setInputFiles(fixture("missing-category-transactions.csv"));
+    await expect(page.locator("#category-review-section")).toBeVisible();
+
+    await page.locator("#cancel-category-review").click();
+
+    await expect(page.locator("#category-review-section")).toBeHidden();
+    await expect(page.locator("#csv-upload-status")).toContainText("cancelled");
+    await expect(page.locator("#total-count")).toContainText(totalBefore);
+  });
 });

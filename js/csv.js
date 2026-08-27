@@ -4,6 +4,9 @@
 // data.js: { date: "YYYY-MM-DD", category: string, amount: number, ...rest }.
 // Extra columns beyond date/category/amount (e.g. "description") are kept
 // on each transaction object unchanged, even though they aren't used yet.
+// "category" is optional: rows with a missing/blank category are kept with
+// category set to "" so the caller can offer auto-suggested categories (see
+// js/categorize.js) for review instead of discarding the row.
 
 /** Case-insensitively finds the actual header name matching `target`, or null. */
 export function findHeader(headers, target) {
@@ -83,11 +86,10 @@ export function parseTransactionsCsv(
   const categoryHeader = findHeader(headers, "category");
   const amountHeader = findHeader(headers, "amount");
 
-  const missing = [
-    !dateHeader && "date",
-    !categoryHeader && "category",
-    !amountHeader && "amount",
-  ].filter(Boolean);
+  // "category" is optional: rows with a missing/blank category are kept (with
+  // category set to "") so the caller can offer auto-suggested categories for
+  // review, rather than silently discarding those rows.
+  const missing = [!dateHeader && "date", !amountHeader && "amount"].filter(Boolean);
 
   if (missing.length > 0) {
     errors.push(
@@ -108,15 +110,11 @@ export function parseTransactionsCsv(
   parsed.data.forEach((row, index) => {
     const rowNumber = index + 2; // +1 for 0-index, +1 for the header row
     const date = normalizeDate(row[dateHeader]);
-    const category = (row[categoryHeader] ?? "").toString().trim();
+    const category = categoryHeader ? (row[categoryHeader] ?? "").toString().trim() : "";
     const amount = normalizeAmount(row[amountHeader]);
 
     if (!date) {
       warnings.push(`Row ${rowNumber}: skipped — invalid or missing date "${row[dateHeader] ?? ""}".`);
-      return;
-    }
-    if (!category) {
-      warnings.push(`Row ${rowNumber}: skipped — missing category.`);
       return;
     }
     if (amount === null) {
@@ -127,7 +125,7 @@ export function parseTransactionsCsv(
     // Preserve any extra columns (e.g. "description") unchanged.
     const extra = { ...row };
     delete extra[dateHeader];
-    delete extra[categoryHeader];
+    if (categoryHeader) delete extra[categoryHeader];
     delete extra[amountHeader];
 
     transactions.push({ date, category, amount, ...extra });

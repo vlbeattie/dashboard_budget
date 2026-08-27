@@ -34,11 +34,16 @@
       <div>
         <h2 class="text-sm font-semibold text-slate-700">Upload your own data</h2>
         <p class="text-sm text-slate-500 mt-0.5">
-          Upload a CSV with <code class="bg-slate-100 text-slate-800 px-1 rounded">date</code>,
-          <code class="bg-slate-100 text-slate-800 px-1 rounded">category</code>, and
+          Upload a CSV with <code class="bg-slate-100 text-slate-800 px-1 rounded">date</code> and
           <code class="bg-slate-100 text-slate-800 px-1 rounded">amount</code> columns (extra columns
           are fine and will be kept). This replaces the chart's data for this browser
           session only — reload the page to go back to the sample data.
+        </p>
+        <p class="text-sm text-slate-500 mt-0.5">
+          A <code class="bg-slate-100 text-slate-800 px-1 rounded">category</code> column is
+          optional — rows with a missing or blank category will get an automatic
+          suggestion (based on the description) that you can review and adjust before
+          it's applied.
         </p>
       </div>
       <div class="flex flex-wrap items-center gap-3">
@@ -52,6 +57,42 @@
         />
       </div>
       <div id="csv-upload-status" role="status" class="hidden text-sm rounded-md px-3 py-2"></div>
+    </section>
+
+    <section id="category-review-section" class="hidden bg-white rounded-lg border border-amber-200 p-4 space-y-3">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-700">Review suggested categories</h2>
+        <p id="category-review-summary" class="text-sm text-slate-500 mt-0.5"></p>
+      </div>
+      <div class="overflow-x-auto max-h-80 overflow-y-auto border border-slate-100 rounded-md">
+        <table class="w-full text-sm text-left">
+          <thead class="bg-slate-50 sticky top-0">
+            <tr class="text-slate-500 border-b border-slate-200">
+              <th scope="col" class="py-1.5 pr-4 pl-3 font-medium">Date</th>
+              <th scope="col" class="py-1.5 pr-4 font-medium">Description</th>
+              <th scope="col" class="py-1.5 pr-4 font-medium text-right">Amount</th>
+              <th scope="col" class="py-1.5 pr-3 font-medium">Category</th>
+            </tr>
+          </thead>
+          <tbody id="category-review-rows" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <button
+          type="button"
+          id="apply-category-review"
+          class="px-3 py-1.5 rounded-md text-sm font-medium bg-slate-900 text-white hover:bg-slate-700 transition-colors"
+        >
+          Apply categories and load data
+        </button>
+        <button
+          type="button"
+          id="cancel-category-review"
+          class="px-3 py-1.5 rounded-md text-sm font-medium border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors"
+        >
+          Cancel upload
+        </button>
+      </div>
     </section>
 
     <section class="bg-white rounded-lg border border-slate-200 p-4 space-y-3">

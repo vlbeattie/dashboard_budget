@@ -137,11 +137,21 @@ describe("parseTransactionsCsv", () => {
     assert.match(warnings[0], /invalid or missing amount/);
   });
 
-  test("skips rows with a missing category", () => {
+  test("keeps rows with a missing/blank category (category is optional)", () => {
     const csv = ["date,category,amount", "2026-01-01,,10"].join("\n");
-    const { transactions, warnings } = parseTransactionsCsv(csv, Papa.parse);
-    assert.equal(transactions.length, 0);
-    assert.match(warnings[0], /missing category/);
+    const { transactions, warnings, errors } = parseTransactionsCsv(csv, Papa.parse);
+    assert.deepEqual(errors, []);
+    assert.equal(transactions.length, 1);
+    assert.equal(transactions[0].category, "");
+    assert.equal(warnings.length, 0);
+  });
+
+  test("keeps rows and defaults category to '' when the category column is entirely absent", () => {
+    const csv = ["date,amount", "2026-01-01,10"].join("\n");
+    const { transactions, errors } = parseTransactionsCsv(csv, Papa.parse);
+    assert.deepEqual(errors, []);
+    assert.equal(transactions.length, 1);
+    assert.equal(transactions[0].category, "");
   });
 
   test("reports an error when no valid rows remain", () => {

@@ -106,8 +106,9 @@ dynamically from whatever is in the file.
 Instead of (or in addition to) editing `data/transactions.json`, you can upload a CSV
 file directly in the browser using the "Upload your own data" control on the page.
 
-- **Required columns** (matched case-insensitively, in any order): `date`,
-  `category`, `amount`.
+- **Required columns** (matched case-insensitively, in any order): `date`, `amount`.
+- **`category` is optional.** See "Automatic categorization" below for what happens
+  when it's missing or blank.
 - **Extra columns** (e.g. `description`) are allowed and are kept on each parsed
   transaction, even though the dashboard doesn't use them yet — they won't be
   discarded.
@@ -115,14 +116,44 @@ file directly in the browser using the "Upload your own data" control on the pag
   other formats are rejected.
 - **Amount format**: a plain number, optionally with a `$` prefix and/or comma
   thousands separators (e.g. `$1,234.56`).
-- **Invalid rows are skipped, not the whole file**: rows with a missing/invalid date,
-  category, or amount are skipped and reported in a warning message alongside a count
-  of how many rows loaded successfully. If the file is missing a required column
-  entirely, the upload is rejected with an error and the chart keeps showing its
-  previous data.
+- **Invalid rows are skipped, not the whole file**: rows with a missing/invalid date
+  or amount are skipped and reported in a warning message alongside a count of how
+  many rows loaded successfully. If the file is missing a required column entirely,
+  the upload is rejected with an error and the chart keeps showing its previous data.
 - **This is in-memory only**: uploaded data is not saved anywhere — it replaces the
   chart's data for the current page view only. Reloading the page reverts to
   `data/transactions.json`.
+
+### Automatic categorization
+
+If an uploaded CSV has no `category` column at all, or leaves it blank on some rows,
+the dashboard tries to guess a category for those rows from their `description`
+using a small built-in keyword/merchant dictionary (`js/category-rules.js`, derived
+from `data/transactions.json` — see "Regenerating the category keyword rules"
+below). **No AI model or external service is used** — it's a plain, fully offline
+substring match, so you can always see exactly why a suggestion was made.
+
+When any rows need a category, a **review table** appears below the upload control
+before anything is applied to the chart:
+
+- Each row shows the transaction's date, description, and amount, plus a dropdown
+  pre-filled with the suggested category (or "Uncategorized" if no keyword matched).
+- Adjust any dropdown as needed, then click **"Apply categories and load data"** to
+  finalize the import — only then does it replace the chart's data.
+- Click **"Cancel upload"** to discard the parsed file and keep the previously
+  loaded data.
+
+### Regenerating the category keyword rules
+
+`js/category-rules.js` is a generated file — regenerate it if you change the
+descriptions in `data/transactions.json` in a way that should affect matching:
+
+```bash
+npm run generate:category-rules
+```
+
+This re-derives keywords from every `description`/`category` pair in
+`data/transactions.json` and overwrites `js/category-rules.js`.
 
 ## Quality checks (linting, accessibility, tests)
 
@@ -142,12 +173,13 @@ Available scripts:
 | Command             | What it does                                                        |
 |----------------------|----------------------------------------------------------------------|
 | `npm run lint`       | Runs all linters: ESLint (JS), Stylelint (CSS), html-validate (HTML) |
-| `npm run lint:js`    | ESLint on `js/`, `test/`, `e2e/`                                     |
+| `npm run lint:js`    | ESLint on `js/`, `test/`, `e2e/`, `scripts/`                         |
 | `npm run lint:css`   | Stylelint on `css/**/*.css`                                          |
 | `npm run lint:html`  | html-validate on `index.html`                                       |
 | `npm run test:unit`  | Runs unit tests (`test/`) with Node's built-in `node:test` runner    |
 | `npm run test:e2e`   | Runs Playwright browser tests (`e2e/`), including the accessibility audit |
 | `npm test`           | Runs lint + unit tests + e2e/a11y tests, in that order                |
+| `npm run generate:category-rules` | Regenerates `js/category-rules.js` from `data/transactions.json` |
 
 **Linting**: ESLint catches JS bugs, Stylelint checks the shared stylesheet, and
 html-validate checks HTML structure/semantics.
@@ -165,16 +197,18 @@ date inputs) and focus visibility when adding new UI.
 
 **Tests**: `test/data.test.js` unit-tests the pure data functions in `js/data.js`
 (date filtering, category aggregation, "Other" grouping, preset date ranges, and
-per-category transaction lookup/sorting) and `test/csv.test.js` unit-tests the CSV
+per-category transaction lookup/sorting), `test/csv.test.js` unit-tests the CSV
 parsing/validation logic in `js/csv.js` (date/amount normalization, missing-column
-detection, invalid-row skipping) — both use Node's built-in test runner.
+detection, invalid-row skipping, optional category handling), and
+`test/categorize.test.js` unit-tests the keyword-matching logic in `js/categorize.js`
+— all three use Node's built-in test runner.
 `e2e/spending-by-category.spec.js`, `e2e/category-drilldown.spec.js`, and
 `e2e/csv-upload.spec.js` use Playwright to drive a real browser against the page
 (served locally via `http-server`, started automatically by the Playwright config)
 and verify the chart, presets, custom date filtering, "Other" breakdown, clicking a
 slice/legend row/"Other" row to view and clear a category's transaction detail, and
-CSV upload (valid files, partially-invalid files, and files missing required
-columns) all work end-to-end.
+CSV upload (valid files, partially-invalid files, files missing required columns,
+and the auto-categorization review/apply/cancel flow) all work end-to-end.
 
 **CI**: `.github/workflows/ci.yml` runs `npm run lint`, `npm run test:unit`, and
 `npm run test:e2e` on every push and pull request.
