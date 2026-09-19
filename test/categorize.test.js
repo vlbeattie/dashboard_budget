@@ -1,6 +1,12 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
-import { suggestCategory, suggestCategoriesForReview } from "../js/categorize.js";
+import {
+  suggestCategory,
+  suggestCategoryTiered,
+  suggestCategoriesForReview,
+} from "../js/categorize.js";
+import { CATEGORY_RULES } from "../js/category-rules.js";
+import { MERCHANT_KEYWORDS } from "../js/merchant-keywords.js";
 
 const testRules = [
   { category: "Groceries", keywords: ["whole foods market", "trader joe's", "safeway", "trader"] },
@@ -33,6 +39,74 @@ describe("suggestCategory", () => {
     assert.equal(suggestCategory("", testRules), null);
     assert.equal(suggestCategory(undefined, testRules), null);
     assert.equal(suggestCategory("   ", testRules), null);
+  });
+});
+
+describe("suggestCategoryTiered", () => {
+  const tier1 = [{ category: "Insurance", keywords: ["farm"] }];
+  const tier2 = [
+    { category: "Groceries", keywords: ["royal farms"] },
+    { category: "Shopping-General Merchandise", keywords: ["target"] },
+  ];
+
+  test("uses the first tier when it has the only match", () => {
+    const result = suggestCategoryTiered("STATE FARM AUTO PAY", [tier1, tier2]);
+    assert.deepEqual(result, { category: "Insurance", matchedKeyword: "farm" });
+  });
+
+  test("falls back to a later tier when the first tier has no match", () => {
+    const result = suggestCategoryTiered("TARGET T-1234 ARLINGTON VA", [tier1, tier2]);
+    assert.deepEqual(result, { category: "Shopping-General Merchandise", matchedKeyword: "target" });
+  });
+
+  test("prefers a longer/more specific match from a later tier over a shorter generic match from an earlier tier", () => {
+    const result = suggestCategoryTiered("ROYAL FARMS #456", [tier1, tier2]);
+    assert.deepEqual(result, { category: "Groceries", matchedKeyword: "royal farms" });
+  });
+
+  test("prefers the earlier tier on an exact-length tie", () => {
+    const tierA = [{ category: "A", keywords: ["match"] }];
+    const tierB = [{ category: "B", keywords: ["match"] }];
+    const result = suggestCategoryTiered("this is a match", [tierA, tierB]);
+    assert.equal(result.category, "A");
+  });
+
+  test("returns null when no tier matches", () => {
+    assert.equal(suggestCategoryTiered("Some Unrecognized Merchant", [tier1, tier2]), null);
+  });
+
+  test("defaults to the app's real CATEGORY_RULES and MERCHANT_KEYWORDS tiers", () => {
+    // "ExxonMobil" is only known via the curated merchant-keywords fallback,
+    // not the app's own generated transaction history.
+    const result = suggestCategoryTiered("ExxonMobil #1234");
+    assert.equal(result.category, "Travel-Lodging/Booking");
+  });
+});
+
+describe("MERCHANT_KEYWORDS data integrity", () => {
+  test("has no duplicate keywords across categories", () => {
+    const seen = new Map();
+    for (const { category, keywords } of MERCHANT_KEYWORDS) {
+      for (const keyword of keywords) {
+        assert.ok(!seen.has(keyword), `duplicate keyword "${keyword}" in "${category}" (also in "${seen.get(keyword)}")`);
+        seen.set(keyword, category);
+      }
+    }
+  });
+
+  test("has no conflicts with the generated CATEGORY_RULES tier", () => {
+    const generatedKeywords = new Map();
+    for (const { category, keywords } of CATEGORY_RULES) {
+      for (const keyword of keywords) generatedKeywords.set(keyword, category);
+    }
+    for (const { category, keywords } of MERCHANT_KEYWORDS) {
+      for (const keyword of keywords) {
+        const existing = generatedKeywords.get(keyword);
+        if (existing) {
+          assert.equal(existing, category, `keyword "${keyword}" maps to "${existing}" in CATEGORY_RULES but "${category}" in MERCHANT_KEYWORDS`);
+        }
+      }
+    }
   });
 });
 

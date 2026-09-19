@@ -2,8 +2,10 @@
 // Uses PapaParse (loaded globally via CDN script in index.html) to parse the
 // raw CSV text, then validates/normalizes rows into the same shape used by
 // data.js: { date: "YYYY-MM-DD", category: string, amount: number, ...rest }.
-// Extra columns beyond date/category/amount (e.g. "description") are kept
-// on each transaction object unchanged, even though they aren't used yet.
+// "date", "category", "amount", and "description" columns are recognized
+// case-insensitively and normalized to those canonical (lowercase) keys.
+// Any other extra columns are kept on each transaction object unchanged,
+// under their original header name, even though they aren't used yet.
 // "category" is optional: rows with a missing/blank category are kept with
 // category set to "" so the caller can offer auto-suggested categories (see
 // js/categorize.js) for review instead of discarding the row.
@@ -85,6 +87,10 @@ export function parseTransactionsCsv(
   const dateHeader = findHeader(headers, "date");
   const categoryHeader = findHeader(headers, "category");
   const amountHeader = findHeader(headers, "amount");
+  // "description" is recognized case-insensitively (like the required columns
+  // above) and normalized to a lowercase "description" key, so it works
+  // regardless of how the source file capitalizes it (e.g. "Description").
+  const descriptionHeader = findHeader(headers, "description");
 
   // "category" is optional: rows with a missing/blank category are kept (with
   // category set to "") so the caller can offer auto-suggested categories for
@@ -122,13 +128,21 @@ export function parseTransactionsCsv(
       return;
     }
 
-    // Preserve any extra columns (e.g. "description") unchanged.
+    // Preserve any extra columns (e.g. a custom "memo" column) unchanged, but
+    // normalize recognized ones (date/category/amount/description) to their
+    // canonical lowercase keys regardless of the source column's casing.
     const extra = { ...row };
     delete extra[dateHeader];
     if (categoryHeader) delete extra[categoryHeader];
     delete extra[amountHeader];
 
-    transactions.push({ date, category, amount, ...extra });
+    let description;
+    if (descriptionHeader) {
+      description = (row[descriptionHeader] ?? "").toString().trim();
+      delete extra[descriptionHeader];
+    }
+
+    transactions.push({ date, category, amount, ...(description !== undefined && { description }), ...extra });
   });
 
   if (transactions.length === 0) {

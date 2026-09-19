@@ -95,6 +95,25 @@ describe("parseTransactionsCsv", () => {
     assert.equal(transactions[0].date, "2026-01-01");
   });
 
+  test("normalizes a differently-cased Description column to lowercase 'description'", () => {
+    const csv = [
+      "Date,Description,Spending Category,Amount",
+      "2026-01-01,ExxonMobil,Gas and Fuel,42.50",
+    ].join("\n");
+    const { transactions, errors } = parseTransactionsCsv(csv, Papa.parse);
+
+    assert.deepEqual(errors, []);
+    assert.equal(transactions.length, 1);
+    // "description" is recognized case-insensitively and normalized...
+    assert.equal(transactions[0].description, "ExxonMobil");
+    assert.equal(transactions[0].Description, undefined);
+    // ...while a truly unrecognized column (no "category" match) is kept
+    // verbatim under its original header name.
+    assert.equal(transactions[0]["Spending Category"], "Gas and Fuel");
+    // category is absent/unrecognized, so it defaults to "" for review.
+    assert.equal(transactions[0].category, "");
+  });
+
   test("errors when a required column is missing", () => {
     const csv = ["category,amount", "Groceries,10"].join("\n");
     const { transactions, errors } = parseTransactionsCsv(csv, Papa.parse);

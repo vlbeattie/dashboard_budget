@@ -40,13 +40,17 @@ from a local JSON file in the browser. Designed to be deployed on GitHub Pages.
 ├── js/
 │   ├── data.js                         # Data loading, date filtering, and category aggregation helpers (ES module)
 │   ├── csv.js                          # CSV parsing/validation for the "upload your own data" feature (ES module)
+│   ├── categorize.js                   # Auto-categorization suggestion logic for uploaded CSVs (ES module)
+│   ├── category-rules.js               # Generated keyword rules derived from data/transactions.json
+│   ├── merchant-keywords.js            # Hand-curated fallback list of well-known merchant/brand names
 │   └── pages/
 │       └── spending-by-category.js     # Page-specific logic: wires up filters, CSV upload, and renders the chart (ES module)
 ├── data/
 │   └── transactions.json               # Transaction data: [{ date, category, amount }, ...]
 ├── test/
 │   ├── data.test.js                    # Unit tests for js/data.js
-│   └── csv.test.js                     # Unit tests for js/csv.js
+│   ├── csv.test.js                     # Unit tests for js/csv.js
+│   └── categorize.test.js              # Unit tests for js/categorize.js
 └── e2e/
     ├── spending-by-category.spec.js    # Playwright browser tests for the page
     ├── csv-upload.spec.js              # Playwright tests for the CSV upload feature
@@ -109,8 +113,12 @@ file directly in the browser using the "Upload your own data" control on the pag
 - **Required columns** (matched case-insensitively, in any order): `date`, `amount`.
 - **`category` is optional.** See "Automatic categorization" below for what happens
   when it's missing or blank.
-- **Extra columns** (e.g. `description`) are allowed and are kept on each parsed
-  transaction, even though the dashboard doesn't use them yet — they won't be
+- **`description` is recognized case-insensitively too** (e.g. `Description` or
+  `DESCRIPTION` both work) and normalized to a `description` field, since it's
+  used by the automatic categorization feature below.
+- **Other extra columns** (e.g. a bank's own `Spending Category` or a custom `memo`
+  column) are allowed and are kept on each parsed transaction under their original
+  header name, even though the dashboard doesn't use them yet — they won't be
   discarded.
 - **Date formats accepted**: ISO `YYYY-MM-DD`, or `MM/DD/YYYY` (and `M/D/YYYY`);
   other formats are rejected.
@@ -128,10 +136,22 @@ file directly in the browser using the "Upload your own data" control on the pag
 
 If an uploaded CSV has no `category` column at all, or leaves it blank on some rows,
 the dashboard tries to guess a category for those rows from their `description`
-using a small built-in keyword/merchant dictionary (`js/category-rules.js`, derived
-from `data/transactions.json` — see "Regenerating the category keyword rules"
-below). **No AI model or external service is used** — it's a plain, fully offline
-substring match, so you can always see exactly why a suggestion was made.
+using two layers of built-in, fully offline keyword dictionaries — **no AI model or
+external service is used**, so you can always see exactly why a suggestion was made:
+
+1. **`js/category-rules.js`** — generated from the app's own transaction history
+   (`data/transactions.json`; see "Regenerating the category keyword rules" below).
+   Tried first, since it reflects how *this* data has actually been categorized.
+2. **`js/merchant-keywords.js`** — a hand-curated fallback list of well-known
+   national merchant/brand names (grocery chains, gas stations, airlines, hotels,
+   restaurants, etc.), used only when the first layer finds no match. Edit this
+   file directly to add more brands — unlike `category-rules.js`, it's not
+   generated, so no script needs to be re-run.
+
+Both layers are plain substring matches; the longest/most specific match wins
+overall (across both layers), so a specific phrase like "royal farms" or "credit
+card payment" is preferred over an incidental shorter/generic match like "farm" or
+"card".
 
 When any rows need a category, a **review table** appears below the upload control
 before anything is applied to the chart:
