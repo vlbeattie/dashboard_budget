@@ -1,7 +1,7 @@
 // CSV parsing and validation for the "upload your own data" feature.
-// Uses PapaParse (loaded globally via CDN script in index.html) to parse the
-// raw CSV text, then validates/normalizes rows into the same shape used by
-// data.js: { date: "YYYY-MM-DD", category: string, amount: number, ...rest }.
+// Uses PapaParse (installed as an npm dependency, see package.json) to parse
+// the raw CSV text, then validates/normalizes rows into the same shape used
+// by data.js: { date: "YYYY-MM-DD", category: string, amount: number, ...rest }.
 // "date", "category", "amount", and "description" columns are recognized
 // case-insensitively and normalized to those canonical (lowercase) keys.
 // Any other extra columns are kept on each transaction object unchanged,
@@ -9,6 +9,8 @@
 // "category" is optional: rows with a missing/blank category are kept with
 // category set to "" so the caller can offer auto-suggested categories (see
 // js/categorize.js) for review instead of discarding the row.
+
+import Papa from "papaparse";
 
 /** Case-insensitively finds the actual header name matching `target`, or null. */
 export function findHeader(headers, target) {
@@ -63,18 +65,11 @@ export function normalizeAmount(raw) {
 /**
  * Parses and validates CSV text into transaction objects.
  * @param {string} csvText
- * @param {(csv: string, options: object) => object} [papaParse] Defaults to the
- *   global `Papa.parse` (loaded via CDN in the browser). A parser can be
- *   injected here for unit testing in Node.
+ * @param {(csv: string, options: object) => object} [papaParse] Defaults to
+ *   PapaParse's `Papa.parse`. A parser can be injected here for unit testing.
  * @returns {{ transactions: Array<object>, warnings: string[], errors: string[] }}
  */
-export function parseTransactionsCsv(
-  csvText,
-  papaParse = typeof Papa !== "undefined" ? Papa.parse.bind(Papa) : undefined
-) {
-  if (!papaParse) {
-    throw new Error("No CSV parser available: Papa Parse was not found.");
-  }
+export function parseTransactionsCsv(csvText, papaParse = Papa.parse.bind(Papa)) {
   const parsed = papaParse(csvText, {
     header: true,
     skipEmptyLines: true,

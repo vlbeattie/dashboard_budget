@@ -1,4 +1,5 @@
 // Page logic for the "Spending by Category" pie chart page.
+import Chart from "chart.js/auto";
 import {
   loadTransactions,
   filterByDateRange,

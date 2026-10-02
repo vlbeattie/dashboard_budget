@@ -2,26 +2,33 @@
   "name": "budget-dashboard",
   "version": "1.0.0",
   "private": true,
-  "description": "Static budget dashboard (HTML/Tailwind CDN/Chart.js) with linting and tests.",
+  "description": "Static budget dashboard (HTML/Tailwind CDN, Chart.js + PapaParse bundled via esbuild) with linting and tests.",
   "type": "module",
   "scripts": {
     "generate:category-rules": "node scripts/generate-category-rules.mjs",
+    "build": "esbuild js/pages/spending-by-category.js --bundle --outfile=dist/bundle.js --format=iife",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
     "lint:js": "eslint js/ test/ e2e/ scripts/",
     "lint:css": "stylelint \"css/**/*.css\"",
     "lint:html": "html-validate index.html",
     "test:unit": "node --test",
+    "pretest:e2e": "npm run build",
     "test:e2e": "playwright test",
+    "pretest": "npm run build",
     "test": "npm run lint && npm run test:unit && npm run test:e2e"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
     "@playwright/test": "^1.48.0",
+    "esbuild": "^0.28.2",
     "eslint": "^9.13.0",
     "html-validate": "^8.24.0",
     "http-server": "^14.1.1",
     "stylelint": "^16.10.0",
-    "stylelint-config-standard": "^36.0.1",
-    "papaparse": "^5.4.1"
+    "stylelint-config-standard": "^36.0.1"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "papaparse": "^5.6.0"
   }
 }

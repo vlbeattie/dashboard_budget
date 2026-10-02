@@ -1,8 +1,11 @@
 # Budget Dashboard
 
 A simple, static budget dashboard built with plain HTML5, Tailwind CSS (via CDN), and
-Chart.js. No backend, no build step, no framework — just static files that read data
-from a local JSON file in the browser. Designed to be deployed on GitHub Pages.
+Chart.js. No backend, no framework — just static files that read data from a local
+JSON file in the browser. Chart.js and PapaParse are npm dependencies bundled into a
+single committed `dist/bundle.js` (see "Building the JS bundle" below) rather than
+loaded from a CDN or referenced directly in `index.html`. Designed to be deployed on
+GitHub Pages.
 
 ## Features
 
@@ -26,8 +29,8 @@ from a local JSON file in the browser. Designed to be deployed on GitHub Pages.
 |-----------|------------------------------------------------------|
 | Markup    | Plain HTML5, multi-page site (no framework)          |
 | Styling   | [Tailwind CSS](https://tailwindcss.com) via CDN script, plus a small shared `css/styles.css` for the few rules Tailwind's utility classes don't cover |
-| Charts    | [Chart.js](https://www.chartjs.org) via CDN          |
-| CSV parsing | [PapaParse](https://www.papaparse.com) via CDN, for the "upload your own data" feature |
+| Charts    | [Chart.js](https://www.chartjs.org), installed as an npm dependency and imported as an ES module (`chart.js/auto`) |
+| CSV parsing | [PapaParse](https://www.papaparse.com), installed as an npm dependency and imported as an ES module, for the "upload your own data" feature |
 | Data      | Static JSON (`data/transactions.json`), fetched directly in the browser — no database or API |
 
 ## Project structure
@@ -45,6 +48,8 @@ from a local JSON file in the browser. Designed to be deployed on GitHub Pages.
 │   ├── merchant-keywords.js            # Hand-curated fallback list of well-known merchant/brand names
 │   └── pages/
 │       └── spending-by-category.js     # Page-specific logic: wires up filters, CSV upload, and renders the chart (ES module)
+├── dist/
+│   └── bundle.js                       # Generated: esbuild bundle of spending-by-category.js + chart.js + papaparse (loaded by index.html)
 ├── data/
 │   └── transactions.json               # Transaction data: [{ date, category, amount }, ...]
 ├── test/
@@ -192,6 +197,7 @@ Available scripts:
 
 | Command             | What it does                                                        |
 |----------------------|----------------------------------------------------------------------|
+| `npm run build`      | Bundles `js/pages/spending-by-category.js` plus `chart.js` and `papaparse` from `node_modules` into `dist/bundle.js` via esbuild |
 | `npm run lint`       | Runs all linters: ESLint (JS), Stylelint (CSS), html-validate (HTML) |
 | `npm run lint:js`    | ESLint on `js/`, `test/`, `e2e/`, `scripts/`                         |
 | `npm run lint:css`   | Stylelint on `css/**/*.css`                                          |
@@ -232,3 +238,13 @@ and the auto-categorization review/apply/cancel flow) all work end-to-end.
 
 **CI**: `.github/workflows/ci.yml` runs `npm run lint`, `npm run test:unit`, and
 `npm run test:e2e` on every push and pull request.
+
+**Building the JS bundle**: `index.html` loads a single `<script src="dist/bundle.js">`
+instead of referencing Chart.js/PapaParse CDN URLs or `js/pages/spending-by-category.js`
+directly, so the browser never needs a `<script type="module">`/import-map setup for
+third-party packages. `dist/bundle.js` is a generated file (like `js/category-rules.js`)
+that's committed to the repo so GitHub Pages can serve it without a deploy-time build
+step. Run `npm run build` after changing any file under `js/` or upgrading `chart.js`/
+`papaparse`, and commit the regenerated `dist/bundle.js` along with your change. `npm
+test` and `npm run test:e2e` also rebuild it automatically before running (see the
+`pretest`/`pretest:e2e` scripts), so the e2e suite always exercises the latest code.

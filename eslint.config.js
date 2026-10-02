@@ -12,8 +12,6 @@ export default [
         document: "readonly",
         fetch: "readonly",
         console: "readonly",
-        Chart: "readonly",
-        Papa: "readonly",
         FileReader: "readonly",
       },
     },
