@@ -1,11 +1,14 @@
 # Budget Dashboard
 
-A simple, static budget dashboard built with plain HTML5, Tailwind CSS (via CDN), and
-Chart.js. No backend, no framework — just static files that read data from a local
-JSON file in the browser. Chart.js and PapaParse are npm dependencies bundled into a
-single committed `dist/bundle.js` (see "Building the JS bundle" below) rather than
-loaded from a CDN or referenced directly in `index.html`. Designed to be deployed on
-GitHub Pages.
+A simple, static budget dashboard built with plain HTML5, Tailwind CSS (precompiled to
+a static stylesheet), and Chart.js. No backend, no framework — just static files that
+read data from a local JSON file in the browser. Chart.js, PapaParse, and Tailwind CSS
+are npm dependencies built into committed files (`dist/bundle.js` and
+`css/tailwind.css`; see "Building the JS bundle" and "Building the CSS" below) rather
+than loaded from a CDN or referenced directly in `index.html`. This means the site runs
+fully offline (no network access needed to view it, including in sandboxed
+environments) once `node_modules` is installed and the build has been run at least
+once. Designed to be deployed on GitHub Pages.
 
 ## Features
 
@@ -28,7 +31,7 @@ GitHub Pages.
 | Layer     | Choice                                              |
 |-----------|------------------------------------------------------|
 | Markup    | Plain HTML5, multi-page site (no framework)          |
-| Styling   | [Tailwind CSS](https://tailwindcss.com) via CDN script, plus a small shared `css/styles.css` for the few rules Tailwind's utility classes don't cover |
+| Styling   | [Tailwind CSS](https://tailwindcss.com), compiled ahead of time via the `tailwindcss` CLI into a static `css/tailwind.css` (see "Building the CSS" below), plus a small shared `css/styles.css` for the few rules Tailwind's utility classes don't cover |
 | Charts    | [Chart.js](https://www.chartjs.org), installed as an npm dependency and imported as an ES module (`chart.js/auto`) |
 | CSV parsing | [PapaParse](https://www.papaparse.com), installed as an npm dependency and imported as an ES module, for the "upload your own data" feature |
 | Data      | Static JSON (`data/transactions.json`), fetched directly in the browser — no database or API |
@@ -39,7 +42,9 @@ GitHub Pages.
 .
 ├── index.html                          # Spending by Category page
 ├── css/
-│   └── styles.css                      # Shared stylesheet
+│   ├── styles.css                      # Shared stylesheet
+│   ├── tailwind-input.css              # Tailwind entry point (@tailwind base/components/utilities)
+│   └── tailwind.css                    # Generated: static Tailwind build output (loaded by index.html)
 ├── js/
 │   ├── data.js                         # Data loading, date filtering, and category aggregation helpers (ES module)
 │   ├── csv.js                          # CSV parsing/validation for the "upload your own data" feature (ES module)
@@ -197,7 +202,9 @@ Available scripts:
 
 | Command             | What it does                                                        |
 |----------------------|----------------------------------------------------------------------|
-| `npm run build`      | Bundles `js/pages/spending-by-category.js` plus `chart.js` and `papaparse` from `node_modules` into `dist/bundle.js` via esbuild |
+| `npm run build`      | Runs `build:js` and `build:css` (see below)                          |
+| `npm run build:js`   | Bundles `js/pages/spending-by-category.js` plus `chart.js` and `papaparse` from `node_modules` into `dist/bundle.js` via esbuild |
+| `npm run build:css`  | Compiles `css/tailwind-input.css` into the static `css/tailwind.css` via the Tailwind CLI |
 | `npm run lint`       | Runs all linters: ESLint (JS), Stylelint (CSS), html-validate (HTML) |
 | `npm run lint:js`    | ESLint on `js/`, `test/`, `e2e/`, `scripts/`                         |
 | `npm run lint:css`   | Stylelint on `css/**/*.css`                                          |
@@ -248,3 +255,16 @@ step. Run `npm run build` after changing any file under `js/` or upgrading `char
 `papaparse`, and commit the regenerated `dist/bundle.js` along with your change. `npm
 test` and `npm run test:e2e` also rebuild it automatically before running (see the
 `pretest`/`pretest:e2e` scripts), so the e2e suite always exercises the latest code.
+
+**Building the CSS**: `index.html` loads a static `<link rel="stylesheet"
+href="css/tailwind.css">` instead of the Tailwind Play CDN `<script>`, so the page
+renders correctly with no internet access (including in offline/sandboxed
+environments) — no runtime JIT compilation or external request is involved.
+`css/tailwind.css` is a generated file (like `dist/bundle.js`) that's committed to the
+repo. `tailwind.config.js` scans `./*.html` and `./js/**/*.js` (including classes
+built dynamically in `js/pages/spending-by-category.js`, e.g. via `classList.add`) to
+determine which utility classes to include. Run `npm run build:css` (or `npm run
+build`) after adding/removing any Tailwind utility class in the markup or JS, and
+commit the regenerated `css/tailwind.css` along with your change. `npm test` and `npm
+run test:e2e` also rebuild it automatically before running (see the
+`pretest`/`pretest:e2e` scripts).

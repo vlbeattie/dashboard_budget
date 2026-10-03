@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "generate:category-rules": "node scripts/generate-category-rules.mjs",
-    "build": "esbuild js/pages/spending-by-category.js --bundle --outfile=dist/bundle.js --format=iife",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "esbuild js/pages/spending-by-category.js --bundle --outfile=dist/bundle.js --format=iife",
+    "build:css": "tailwindcss -i ./css/tailwind-input.css -o ./css/tailwind.css --minify",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
     "lint:js": "eslint js/ test/ e2e/ scripts/",
     "lint:css": "stylelint \"css/**/*.css\"",
@@ -25,7 +27,8 @@
     "html-validate": "^8.24.0",
     "http-server": "^14.1.1",
     "stylelint": "^16.10.0",
-    "stylelint-config-standard": "^36.0.1"
+    "stylelint-config-standard": "^36.0.1",
+    "tailwindcss": "^3.4.19"
   },
   "dependencies": {
     "chart.js": "^4.5.1",
