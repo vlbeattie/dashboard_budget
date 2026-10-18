@@ -12,9 +12,64 @@
 
 import Papa from "papaparse";
 
+/** The canonical transaction fields the app recognizes, in display order. */
+export const CANONICAL_COLUMNS = ["date", "amount", "description", "category"];
+/** Canonical fields that every CSV must resolve to a column (no substitute allowed to skip them). */
+export const REQUIRED_CANONICAL_COLUMNS = ["date", "amount"];
+
 /** Case-insensitively finds the actual header name matching `target`, or null. */
 export function findHeader(headers, target) {
   return headers.find((h) => h.trim().toLowerCase() === target) ?? null;
+}
+
+/**
+ * Parses just the header row of a CSV (cheap — only reads the first row),
+ * returning the list of column names as found in the file.
+ * @param {string} csvText
+ * @param {(csv: string, options: object) => object} [papaParse]
+ * @returns {string[]}
+ */
+export function parseCsvHeaders(csvText, papaParse = Papa.parse.bind(Papa)) {
+  const parsed = papaParse(csvText, { header: true, skipEmptyLines: true, preview: 1 });
+  return parsed.meta?.fields ?? [];
+}
+
+/**
+ * Determines whether the user needs to pick substitute columns before this
+ * CSV can be imported, based on which of the 4 canonical columns
+ * (date/amount/description/category) are auto-detectable (case-insensitive
+ * exact match) in `headers`.
+ *
+ * - "date" and "amount" are always required: if either is missing, the user
+ *   must substitute another column for it (or cancel the import).
+ * - "description" and "category" are each optional individually, but at
+ *   least one of the two is needed to produce meaningful expense
+ *   breakdowns — so a substitute is only required for them when *both* are
+ *   missing.
+ *
+ * @param {string[]} headers
+ * @returns {{
+ *   needsMapping: boolean,
+ *   missingRequired: string[],
+ *   missingDescriptive: boolean,
+ *   detected: Record<string, string|null>,
+ * }}
+ */
+export function getColumnMappingNeeds(headers) {
+  const detected = {};
+  for (const field of CANONICAL_COLUMNS) {
+    detected[field] = findHeader(headers, field);
+  }
+
+  const missingRequired = REQUIRED_CANONICAL_COLUMNS.filter((field) => !detected[field]);
+  const missingDescriptive = !detected.description && !detected.category;
+
+  return {
+    needsMapping: missingRequired.length > 0 || missingDescriptive,
+    missingRequired,
+    missingDescriptive,
+    detected,
+  };
 }
 
 /**
@@ -67,9 +122,15 @@ export function normalizeAmount(raw) {
  * @param {string} csvText
  * @param {(csv: string, options: object) => object} [papaParse] Defaults to
  *   PapaParse's `Papa.parse`. A parser can be injected here for unit testing.
+ * @param {Record<string, string>} [columnMapping] Optional explicit mapping
+ *   from canonical field name ("date"/"amount"/"description"/"category") to
+ *   the actual CSV header to use for it, letting a caller substitute a
+ *   differently-named column (e.g. a bank's "Transaction Date" column mapped
+ *   to "date"). Takes precedence over auto-detection for any field it sets;
+ *   see `getColumnMappingNeeds` for determining when this is needed.
  * @returns {{ transactions: Array<object>, warnings: string[], errors: string[] }}
  */
-export function parseTransactionsCsv(csvText, papaParse = Papa.parse.bind(Papa)) {
+export function parseTransactionsCsv(csvText, papaParse = Papa.parse.bind(Papa), columnMapping = {}) {
   const parsed = papaParse(csvText, {
     header: true,
     skipEmptyLines: true,
@@ -79,13 +140,14 @@ export function parseTransactionsCsv(csvText, papaParse = Papa.parse.bind(Papa))
   const warnings = [];
 
   const headers = parsed.meta?.fields ?? [];
-  const dateHeader = findHeader(headers, "date");
-  const categoryHeader = findHeader(headers, "category");
-  const amountHeader = findHeader(headers, "amount");
+  const resolveHeader = (field) => columnMapping[field] || findHeader(headers, field);
+  const dateHeader = resolveHeader("date");
+  const categoryHeader = resolveHeader("category");
+  const amountHeader = resolveHeader("amount");
   // "description" is recognized case-insensitively (like the required columns
   // above) and normalized to a lowercase "description" key, so it works
   // regardless of how the source file capitalizes it (e.g. "Description").
-  const descriptionHeader = findHeader(headers, "description");
+  const descriptionHeader = resolveHeader("description");
 
   // "category" is optional: rows with a missing/blank category are kept (with
   // category set to "") so the caller can offer auto-suggested categories for
@@ -125,7 +187,13 @@ export function parseTransactionsCsv(csvText, papaParse = Papa.parse.bind(Papa))
 
     // Preserve any extra columns (e.g. a custom "memo" column) unchanged, but
     // normalize recognized ones (date/category/amount/description) to their
-    // canonical lowercase keys regardless of the source column's casing.
+    // canonical lowercase keys regardless of the source column's casing. A
+    // columnMapping can point a canonical field at a differently-named
+    // header (e.g. "amount" -> "Debit Amount"), potentially leaving an
+    // unrelated column literally named "amount"/"date"/etc. in `extra` — so
+    // `extra` is spread first and the canonical fields are applied after it,
+    // guaranteeing the canonical values always win over any same-named extra
+    // column.
     const extra = { ...row };
     delete extra[dateHeader];
     if (categoryHeader) delete extra[categoryHeader];
@@ -137,7 +205,7 @@ export function parseTransactionsCsv(csvText, papaParse = Papa.parse.bind(Papa))
       delete extra[descriptionHeader];
     }
 
-    transactions.push({ date, category, amount, ...(description !== undefined && { description }), ...extra });
+    transactions.push({ ...extra, date, category, amount, ...(description !== undefined && { description }) });
   });
 
   if (transactions.length === 0) {

@@ -268,3 +268,7 @@ build`) after adding/removing any Tailwind utility class in the markup or JS, an
 commit the regenerated `css/tailwind.css` along with your change. `npm test` and `npm
 run test:e2e` also rebuild it automatically before running (see the
 `pretest`/`pretest:e2e` scripts).
+
+## License
+
+MIT — see [LICENSE](LICENSE).

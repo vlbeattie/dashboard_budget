@@ -14970,8 +14970,28 @@
 
   // js/csv.js
   var import_papaparse = __toESM(require_papaparse_min(), 1);
+  var CANONICAL_COLUMNS = ["date", "amount", "description", "category"];
+  var REQUIRED_CANONICAL_COLUMNS = ["date", "amount"];
   function findHeader(headers, target) {
     return headers.find((h) => h.trim().toLowerCase() === target) ?? null;
+  }
+  function parseCsvHeaders(csvText, papaParse = import_papaparse.default.parse.bind(import_papaparse.default)) {
+    const parsed = papaParse(csvText, { header: true, skipEmptyLines: true, preview: 1 });
+    return parsed.meta?.fields ?? [];
+  }
+  function getColumnMappingNeeds(headers) {
+    const detected = {};
+    for (const field of CANONICAL_COLUMNS) {
+      detected[field] = findHeader(headers, field);
+    }
+    const missingRequired = REQUIRED_CANONICAL_COLUMNS.filter((field) => !detected[field]);
+    const missingDescriptive = !detected.description && !detected.category;
+    return {
+      needsMapping: missingRequired.length > 0 || missingDescriptive,
+      missingRequired,
+      missingDescriptive,
+      detected
+    };
   }
   function normalizeDate(raw) {
     if (typeof raw !== "string") return null;
@@ -15002,7 +15022,7 @@
     const value = Number(cleaned);
     return Number.isFinite(value) ? value : null;
   }
-  function parseTransactionsCsv(csvText, papaParse = import_papaparse.default.parse.bind(import_papaparse.default)) {
+  function parseTransactionsCsv(csvText, papaParse = import_papaparse.default.parse.bind(import_papaparse.default), columnMapping = {}) {
     const parsed = papaParse(csvText, {
       header: true,
       skipEmptyLines: true
@@ -15010,10 +15030,11 @@
     const errors = [];
     const warnings = [];
     const headers = parsed.meta?.fields ?? [];
-    const dateHeader = findHeader(headers, "date");
-    const categoryHeader = findHeader(headers, "category");
-    const amountHeader = findHeader(headers, "amount");
-    const descriptionHeader = findHeader(headers, "description");
+    const resolveHeader = (field) => columnMapping[field] || findHeader(headers, field);
+    const dateHeader = resolveHeader("date");
+    const categoryHeader = resolveHeader("category");
+    const amountHeader = resolveHeader("amount");
+    const descriptionHeader = resolveHeader("description");
     const missing = [!dateHeader && "date", !amountHeader && "amount"].filter(Boolean);
     if (missing.length > 0) {
       errors.push(
@@ -15049,7 +15070,7 @@
         description = (row[descriptionHeader] ?? "").toString().trim();
         delete extra[descriptionHeader];
       }
-      transactions.push({ date, category, amount, ...description !== void 0 && { description }, ...extra });
+      transactions.push({ ...extra, date, category, amount, ...description !== void 0 && { description } });
     });
     if (transactions.length === 0) {
       errors.push("No valid transaction rows were found in the uploaded CSV.");
@@ -15628,6 +15649,20 @@
     return results;
   }
   var UNCATEGORIZED = "Uncategorized";
+  function learnCategoryFromDescription(category, description, rules = CATEGORY_RULES) {
+    if (typeof category !== "string" || !category.trim()) return;
+    if (typeof description !== "string") return;
+    const keyword = description.toLowerCase().trim();
+    if (!keyword) return;
+    const existingRule = rules.find((rule) => rule.category === category);
+    if (existingRule) {
+      if (!existingRule.keywords.includes(keyword)) {
+        existingRule.keywords.unshift(keyword);
+      }
+    } else {
+      rules.push({ category, keywords: [keyword] });
+    }
+  }
 
   // js/pages/spending-by-category.js
   var PALETTE = [
@@ -15658,6 +15693,10 @@
   var pendingReviewTransactions = null;
   var pendingReviewFileName = "";
   var pendingReviewWarnings = [];
+  var pendingMappingCsvText = null;
+  var pendingMappingFileName = "";
+  var pendingMappingNeeds = null;
+  var NEW_CATEGORY_VALUE = "__new_category__";
   function formatCurrency(value) {
     return value.toLocaleString(void 0, { style: "currency", currency: "USD" });
   }
@@ -15888,6 +15927,9 @@
     document.getElementById("clear-category-selection").addEventListener("click", clearSelection);
     document.getElementById("apply-category-review").addEventListener("click", applyCategoryReview);
     document.getElementById("cancel-category-review").addEventListener("click", cancelCategoryReview);
+    document.getElementById("confirm-column-mapping").addEventListener("click", confirmColumnMapping);
+    document.getElementById("cancel-column-mapping").addEventListener("click", cancelColumnMapping);
+    attachCategoryReviewRowListeners();
   }
   function resetDateControlsAndDefaultView() {
     const { min, max } = getDataDateBounds(allTransactions);
@@ -15941,18 +15983,119 @@
           <td class="py-1.5 pr-4">${description}</td>
           <td class="py-1.5 pr-4 text-right whitespace-nowrap">${formatCurrency(transaction.amount)}</td>
           <td class="py-1.5 pr-3">
-            <select
-              data-transaction-index="${index2}"
-              aria-label="Category for ${description} on ${transaction.date}"
-              class="border border-slate-300 rounded-md px-2 py-1 text-sm"
-            >
-              ${options}
-            </select>
+            <div class="flex items-center gap-1" data-category-cell>
+              <select
+                data-transaction-index="${index2}"
+                aria-label="Category for ${description} on ${transaction.date}"
+                class="border border-slate-300 rounded-md px-2 py-1 text-sm"
+              >
+                ${options}
+                <option value="${NEW_CATEGORY_VALUE}">+ Add new category\u2026</option>
+              </select>
+              <span class="hidden items-center gap-1" data-new-category-wrap>
+                <input
+                  type="text"
+                  data-new-category-input
+                  placeholder="New category name"
+                  aria-label="New category name"
+                  class="border border-slate-300 rounded-md px-2 py-1 text-sm w-40"
+                />
+                <button
+                  type="button"
+                  data-new-category-confirm
+                  class="px-2 py-1 text-xs rounded-md bg-slate-900 text-white hover:bg-slate-700 transition-colors"
+                >
+                  Add
+                </button>
+                <button
+                  type="button"
+                  data-new-category-cancel
+                  aria-label="Cancel new category"
+                  class="px-2 py-1 text-xs rounded-md border border-slate-300 text-slate-700 hover:bg-slate-100 transition-colors"
+                >
+                  \u2715
+                </button>
+              </span>
+            </div>
           </td>
         </tr>
       `;
     }).join("");
     section.classList.remove("hidden");
+  }
+  function attachCategoryReviewRowListeners() {
+    const rowsEl = document.getElementById("category-review-rows");
+    rowsEl.addEventListener("change", (event) => {
+      const select = event.target.closest("select[data-transaction-index]");
+      if (select && select.value === NEW_CATEGORY_VALUE) {
+        showNewCategoryInput(select.closest("[data-category-cell]"));
+      }
+    });
+    rowsEl.addEventListener("click", (event) => {
+      const confirmBtn = event.target.closest("[data-new-category-confirm]");
+      if (confirmBtn) {
+        confirmNewCategory(confirmBtn.closest("[data-category-cell]"));
+        return;
+      }
+      const cancelBtn = event.target.closest("[data-new-category-cancel]");
+      if (cancelBtn) {
+        cancelNewCategory(cancelBtn.closest("[data-category-cell]"));
+      }
+    });
+    rowsEl.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && event.target.matches("[data-new-category-input]")) {
+        event.preventDefault();
+        confirmNewCategory(event.target.closest("[data-category-cell]"));
+      }
+    });
+  }
+  function showNewCategoryInput(cell) {
+    const select = cell.querySelector("select");
+    const wrap = cell.querySelector("[data-new-category-wrap]");
+    const input = wrap.querySelector("[data-new-category-input]");
+    select.classList.add("hidden");
+    wrap.classList.remove("hidden");
+    wrap.classList.add("flex");
+    input.value = "";
+    input.focus();
+  }
+  function hideNewCategoryInput(cell) {
+    const select = cell.querySelector("select");
+    const wrap = cell.querySelector("[data-new-category-wrap]");
+    wrap.classList.add("hidden");
+    wrap.classList.remove("flex");
+    select.classList.remove("hidden");
+  }
+  function cancelNewCategory(cell) {
+    const select = cell.querySelector("select");
+    hideNewCategoryInput(cell);
+    select.value = UNCATEGORIZED;
+  }
+  function confirmNewCategory(cell) {
+    const input = cell.querySelector("[data-new-category-input]");
+    const newCategory = input.value.trim();
+    if (!newCategory) {
+      input.focus();
+      return;
+    }
+    const select = cell.querySelector("select");
+    const index2 = Number(select.dataset.transactionIndex);
+    const description = pendingReviewTransactions ? pendingReviewTransactions[index2]?.description : void 0;
+    addCategoryOptionToReviewRows(newCategory);
+    learnCategoryFromDescription(newCategory, description);
+    select.value = newCategory;
+    hideNewCategoryInput(cell);
+  }
+  function addCategoryOptionToReviewRows(category) {
+    document.querySelectorAll("#category-review-rows select[data-transaction-index]").forEach((select) => {
+      const alreadyExists = [...select.options].some((opt) => opt.value === category);
+      if (alreadyExists) return;
+      const option = document.createElement("option");
+      option.value = category;
+      option.textContent = category;
+      const sentinel = [...select.options].find((opt) => opt.value === NEW_CATEGORY_VALUE);
+      select.insertBefore(option, sentinel);
+    });
   }
   function hideCategoryReview() {
     document.getElementById("category-review-section").classList.add("hidden");
@@ -15963,7 +16106,16 @@
   }
   function applyCategoryReview() {
     if (!pendingReviewTransactions) return;
-    document.querySelectorAll("#category-review-rows select[data-transaction-index]").forEach((select) => {
+    const selects = document.querySelectorAll("#category-review-rows select[data-transaction-index]");
+    const unresolved = [...selects].some((select) => select.value === NEW_CATEGORY_VALUE);
+    if (unresolved) {
+      showCsvStatus(
+        'Finish adding the new category (or click "\u2715" to cancel it) before applying.',
+        "error"
+      );
+      return;
+    }
+    selects.forEach((select) => {
       const index2 = Number(select.dataset.transactionIndex);
       pendingReviewTransactions[index2].category = select.value;
     });
@@ -15989,30 +16141,122 @@
       );
     }
   }
+  var COLUMN_FIELD_LABELS = { date: "Date", amount: "Amount", description: "Description", category: "Category" };
+  function renderColumnMappingSection(headers, needs) {
+    const section = document.getElementById("column-mapping-section");
+    const fieldsEl = document.getElementById("column-mapping-fields");
+    const errorEl = document.getElementById("column-mapping-error");
+    errorEl.classList.add("hidden");
+    errorEl.textContent = "";
+    const fieldsToShow = [
+      ...needs.missingRequired.map((field) => ({ field, required: true })),
+      ...needs.missingDescriptive ? [
+        { field: "description", required: false },
+        { field: "category", required: false }
+      ] : []
+    ];
+    fieldsEl.innerHTML = fieldsToShow.map(({ field, required }) => {
+      const options = headers.map((h) => `<option value="${escapeHtml(h)}">${escapeHtml(h)}</option>`).join("");
+      const placeholder = required ? `<option value="" selected disabled>Select a column\u2026</option>` : `<option value="" selected>\u2014 none \u2014</option>`;
+      return `
+        <label class="flex flex-col gap-1 text-sm">
+          <span class="font-medium text-slate-700">
+            ${COLUMN_FIELD_LABELS[field]} column${required ? " (required)" : ""}
+          </span>
+          <select data-mapping-field="${field}" class="border border-slate-300 rounded-md px-2 py-1 text-sm">
+            ${placeholder}
+            ${options}
+          </select>
+        </label>
+      `;
+    }).join("");
+    section.classList.remove("hidden");
+  }
+  function hideColumnMappingSection() {
+    document.getElementById("column-mapping-section").classList.add("hidden");
+    document.getElementById("column-mapping-fields").innerHTML = "";
+    document.getElementById("column-mapping-error").classList.add("hidden");
+    pendingMappingCsvText = null;
+    pendingMappingFileName = "";
+    pendingMappingNeeds = null;
+  }
+  function showColumnMappingError(message) {
+    const errorEl = document.getElementById("column-mapping-error");
+    errorEl.textContent = message;
+    errorEl.classList.remove("hidden");
+  }
+  function confirmColumnMapping() {
+    if (!pendingMappingNeeds) return;
+    const selects = document.querySelectorAll("#column-mapping-fields select[data-mapping-field]");
+    const mapping = {};
+    selects.forEach((select) => {
+      if (select.value) mapping[select.dataset.mappingField] = select.value;
+    });
+    for (const field of pendingMappingNeeds.missingRequired) {
+      if (!mapping[field]) {
+        showColumnMappingError(`Please select a column to use for ${COLUMN_FIELD_LABELS[field]}.`);
+        return;
+      }
+    }
+    if (pendingMappingNeeds.missingDescriptive && !mapping.description && !mapping.category) {
+      showColumnMappingError("Please select a column for Description or Category \u2014 at least one is required.");
+      return;
+    }
+    const mappedHeaders = Object.values(mapping);
+    const hasDuplicate = mappedHeaders.some((h, i) => mappedHeaders.indexOf(h) !== i);
+    if (hasDuplicate) {
+      showColumnMappingError("Each column can only be mapped to one field.");
+      return;
+    }
+    const text = pendingMappingCsvText;
+    const fileName = pendingMappingFileName;
+    hideColumnMappingSection();
+    parseAndReviewCsv(text, fileName, mapping);
+  }
+  function cancelColumnMapping() {
+    hideColumnMappingSection();
+    showCsvStatus("Upload cancelled \u2014 the previous data is unchanged.", "warning");
+  }
+  function parseAndReviewCsv(text, fileName, columnMapping) {
+    const { transactions, warnings, errors } = parseTransactionsCsv(text, void 0, columnMapping);
+    if (errors.length > 0) {
+      showCsvStatus(errors.join(" "), "error");
+      return;
+    }
+    const reviewRows = suggestCategoriesForReview(transactions);
+    if (reviewRows.length > 0) {
+      pendingReviewTransactions = transactions;
+      pendingReviewFileName = fileName;
+      pendingReviewWarnings = warnings;
+      renderCategoryReview(transactions, reviewRows);
+      showCsvStatus(
+        `Parsed "${fileName}" \u2014 ${reviewRows.length} row(s) need a category. Review the suggestions below, then click "Apply categories and load data".`,
+        "warning"
+      );
+      return;
+    }
+    finalizeCsvImport(transactions, fileName, warnings);
+  }
   async function handleCsvUpload(event) {
     const input = event.target;
     const file = input.files && input.files[0];
     if (!file) return;
     try {
       const text = await file.text();
-      const { transactions, warnings, errors } = parseTransactionsCsv(text);
-      if (errors.length > 0) {
-        showCsvStatus(errors.join(" "), "error");
-        return;
-      }
-      const reviewRows = suggestCategoriesForReview(transactions);
-      if (reviewRows.length > 0) {
-        pendingReviewTransactions = transactions;
-        pendingReviewFileName = file.name;
-        pendingReviewWarnings = warnings;
-        renderCategoryReview(transactions, reviewRows);
+      const headers = parseCsvHeaders(text);
+      const needs = getColumnMappingNeeds(headers);
+      if (needs.needsMapping) {
+        pendingMappingCsvText = text;
+        pendingMappingFileName = file.name;
+        pendingMappingNeeds = needs;
+        renderColumnMappingSection(headers, needs);
         showCsvStatus(
-          `Parsed "${file.name}" \u2014 ${reviewRows.length} row(s) need a category. Review the suggestions below, then click "Apply categories and load data".`,
+          `"${file.name}" doesn't use the expected column names. Match up the columns below, then confirm.`,
           "warning"
         );
         return;
       }
-      finalizeCsvImport(transactions, file.name, warnings);
+      parseAndReviewCsv(text, file.name);
     } catch (err) {
       console.error(err);
       showCsvStatus(`Could not read "${file.name}" as a CSV file. See console for details.`, "error");

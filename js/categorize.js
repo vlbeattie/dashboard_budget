@@ -102,3 +102,37 @@ export function suggestCategoriesForReview(transactions, suggester = suggestCate
 }
 
 export const UNCATEGORIZED = "Uncategorized";
+
+/**
+ * Records a user-confirmed category assignment as a new keyword rule (or
+ * extends an existing one for that category), so that `suggestCategory` and
+ * `suggestCategoryTiered` can recognize similar descriptions later in the
+ * session — including a brand-new category the user just created, which
+ * isn't in the generated `CATEGORY_RULES` dataset yet.
+ *
+ * Mutates `rules` in place (by default the shared `CATEGORY_RULES` array),
+ * since that's the array consulted by every other call in this module. This
+ * is intentionally generic (category + description, not CSV-import-specific)
+ * so any other part of the dashboard that lets a user assign/create a
+ * category for a transaction can reuse it to improve future suggestions.
+ *
+ * @param {string} category
+ * @param {string} [description]
+ * @param {{category: string, keywords: string[]}[]} [rules]
+ */
+export function learnCategoryFromDescription(category, description, rules = CATEGORY_RULES) {
+  if (typeof category !== "string" || !category.trim()) return;
+  if (typeof description !== "string") return;
+
+  const keyword = description.toLowerCase().trim();
+  if (!keyword) return;
+
+  const existingRule = rules.find((rule) => rule.category === category);
+  if (existingRule) {
+    if (!existingRule.keywords.includes(keyword)) {
+      existingRule.keywords.unshift(keyword);
+    }
+  } else {
+    rules.push({ category, keywords: [keyword] });
+  }
+}

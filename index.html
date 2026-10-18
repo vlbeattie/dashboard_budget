@@ -32,16 +32,20 @@
       <div>
         <h2 class="text-sm font-semibold text-slate-700">Upload your own data</h2>
         <p class="text-sm text-slate-500 mt-0.5">
-          Upload a CSV with <code class="bg-slate-100 text-slate-800 px-1 rounded">date</code> and
-          <code class="bg-slate-100 text-slate-800 px-1 rounded">amount</code> columns (extra columns
-          are fine and will be kept). This replaces the chart's data for this browser
-          session only — reload the page to go back to the sample data.
+          Upload a CSV with <code class="bg-slate-100 text-slate-800 px-1 rounded">date</code>,
+          <code class="bg-slate-100 text-slate-800 px-1 rounded">amount</code>, and at least one of
+          <code class="bg-slate-100 text-slate-800 px-1 rounded">description</code> or
+          <code class="bg-slate-100 text-slate-800 px-1 rounded">category</code> columns (extra
+          columns are fine and will be kept). If your file uses different column names (common with
+          bank/card exports), you'll be asked to match them up before importing. This replaces the
+          chart's data for this browser session only — reload the page to go back to the sample
+          data.
         </p>
         <p class="text-sm text-slate-500 mt-0.5">
           A <code class="bg-slate-100 text-slate-800 px-1 rounded">category</code> column is
           optional — rows with a missing or blank category will get an automatic
-          suggestion (based on the description) that you can review and adjust before
-          it's applied.
+          suggestion (based on the description) that you can review and adjust, or create a brand
+          new category for, before it's applied.
         </p>
       </div>
       <div class="flex flex-wrap items-center gap-3">
@@ -55,6 +59,34 @@
         />
       </div>
       <div id="csv-upload-status" role="status" class="hidden text-sm rounded-md px-3 py-2"></div>
+    </section>
+
+    <section id="column-mapping-section" class="hidden bg-white rounded-lg border border-amber-200 p-4 space-y-3">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-700">Match up your columns</h2>
+        <p class="text-sm text-slate-500 mt-0.5">
+          This file doesn't use the expected column names. Pick which column from your file should
+          be used for each field below, then confirm — or cancel to pick a different file.
+        </p>
+      </div>
+      <div id="column-mapping-error" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2"></div>
+      <div id="column-mapping-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+      <div class="flex flex-wrap gap-3">
+        <button
+          type="button"
+          id="confirm-column-mapping"
+          class="px-3 py-1.5 rounded-md text-sm font-medium bg-slate-900 text-white hover:bg-slate-700 transition-colors"
+        >
+          Confirm mapping
+        </button>
+        <button
+          type="button"
+          id="cancel-column-mapping"
+          class="px-3 py-1.5 rounded-md text-sm font-medium border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 transition-colors"
+        >
+          Cancel upload
+        </button>
+      </div>
     </section>
 
     <section id="category-review-section" class="hidden bg-white rounded-lg border border-amber-200 p-4 space-y-3">

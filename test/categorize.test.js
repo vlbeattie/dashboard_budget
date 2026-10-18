@@ -4,6 +4,7 @@ import {
   suggestCategory,
   suggestCategoryTiered,
   suggestCategoriesForReview,
+  learnCategoryFromDescription,
 } from "../js/categorize.js";
 import { CATEGORY_RULES } from "../js/category-rules.js";
 import { MERCHANT_KEYWORDS } from "../js/merchant-keywords.js";
@@ -135,5 +136,53 @@ describe("suggestCategoriesForReview", () => {
   test("returns an empty array when every row already has a category", () => {
     const transactions = [{ date: "2026-01-01", category: "Health", description: "CVS", amount: 5 }];
     assert.deepEqual(suggestCategoriesForReview(transactions), []);
+  });
+});
+
+describe("learnCategoryFromDescription", () => {
+  test("adds a new rule for a brand-new category, usable immediately via suggestCategory", () => {
+    const rules = [{ category: "Groceries", keywords: ["safeway"] }];
+    learnCategoryFromDescription("Hobbies", "Local Hobby Shop Supplies", rules);
+
+    assert.equal(rules.length, 2);
+    assert.deepEqual(rules[1], { category: "Hobbies", keywords: ["local hobby shop supplies"] });
+    assert.deepEqual(suggestCategory("Local Hobby Shop Supplies #123", rules), {
+      category: "Hobbies",
+      matchedKeyword: "local hobby shop supplies",
+    });
+  });
+
+  test("extends an existing category's keywords instead of duplicating the rule", () => {
+    const rules = [{ category: "Groceries", keywords: ["safeway"] }];
+    learnCategoryFromDescription("Groceries", "Trader Joes #45", rules);
+
+    assert.equal(rules.length, 1);
+    assert.deepEqual(rules[0].keywords, ["trader joes #45", "safeway"]);
+  });
+
+  test("does not add a duplicate keyword for the same category", () => {
+    const rules = [{ category: "Groceries", keywords: ["safeway"] }];
+    learnCategoryFromDescription("Groceries", "Safeway", rules);
+    assert.deepEqual(rules[0].keywords, ["safeway"]);
+  });
+
+  test("ignores a blank/missing category or description", () => {
+    const rules = [{ category: "Groceries", keywords: ["safeway"] }];
+    learnCategoryFromDescription("", "Some description", rules);
+    learnCategoryFromDescription("Hobbies", "", rules);
+    learnCategoryFromDescription("Hobbies", undefined, rules);
+    assert.equal(rules.length, 1);
+  });
+
+  test("defaults to mutating the shared CATEGORY_RULES array when no rules array is given", () => {
+    const before = CATEGORY_RULES.length;
+    learnCategoryFromDescription("Test-Only Category", "zzz-unique-test-description-zzz");
+    assert.equal(CATEGORY_RULES.length, before + 1);
+    assert.deepEqual(suggestCategoryTiered("zzz-unique-test-description-zzz"), {
+      category: "Test-Only Category",
+      matchedKeyword: "zzz-unique-test-description-zzz",
+    });
+    // Clean up so this test doesn't leak state into other test files.
+    CATEGORY_RULES.pop();
   });
 });

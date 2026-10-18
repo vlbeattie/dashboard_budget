@@ -2,6 +2,7 @@
   "name": "budget-dashboard",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "description": "Static budget dashboard (HTML/Tailwind CDN, Chart.js + PapaParse bundled via esbuild) with linting and tests.",
   "type": "module",
   "scripts": {

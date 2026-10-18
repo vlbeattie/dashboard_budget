@@ -1,7 +1,14 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import Papa from "papaparse";
-import { parseTransactionsCsv, normalizeDate, normalizeAmount, findHeader } from "../js/csv.js";
+import {
+  parseTransactionsCsv,
+  normalizeDate,
+  normalizeAmount,
+  findHeader,
+  parseCsvHeaders,
+  getColumnMappingNeeds,
+} from "../js/csv.js";
 
 describe("findHeader", () => {
   test("matches case-insensitively and trims whitespace", () => {
@@ -180,4 +187,66 @@ describe("parseTransactionsCsv", () => {
     assert.equal(errors.length, 1);
     assert.match(errors[0], /no valid transaction rows/i);
   });
+
+  test("uses a columnMapping to substitute a differently-named required column", () => {
+    const csv = [
+      "Transaction Date,Description,Debit Amount",
+      "2026-01-01,Trader Joes,42.50",
+    ].join("\n");
+    const { transactions, errors } = parseTransactionsCsv(csv, Papa.parse, {
+      date: "Transaction Date",
+      amount: "Debit Amount",
+    });
+    assert.deepEqual(errors, []);
+    assert.equal(transactions.length, 1);
+    assert.equal(transactions[0].date, "2026-01-01");
+    assert.equal(transactions[0].amount, 42.5);
+    assert.equal(transactions[0].description, "Trader Joes");
+    // The original mapped-from header shouldn't linger as an extra column.
+    assert.equal(transactions[0]["Transaction Date"], undefined);
+    assert.equal(transactions[0]["Debit Amount"], undefined);
+  });
+
+  test("columnMapping takes precedence over auto-detection", () => {
+    const csv = ["date,amount,Backup Amount", "2026-01-01,10,99"].join("\n");
+    const { transactions } = parseTransactionsCsv(csv, Papa.parse, { amount: "Backup Amount" });
+    assert.equal(transactions[0].amount, 99);
+  });
 });
+
+describe("parseCsvHeaders", () => {
+  test("returns the header row without parsing all data rows", () => {
+    const csv = ["Date,Amount,Memo", "2026-01-01,10,test", "2026-01-02,20,test2"].join("\n");
+    assert.deepEqual(parseCsvHeaders(csv, Papa.parse), ["Date", "Amount", "Memo"]);
+  });
+});
+
+describe("getColumnMappingNeeds", () => {
+  test("needs no mapping when all 4 canonical columns are present", () => {
+    const needs = getColumnMappingNeeds(["Date", "Category", "Amount", "Description"]);
+    assert.equal(needs.needsMapping, false);
+    assert.deepEqual(needs.missingRequired, []);
+    assert.equal(needs.missingDescriptive, false);
+  });
+
+  test("needs no mapping when only one of description/category is present", () => {
+    const needs = getColumnMappingNeeds(["Date", "Amount", "Description"]);
+    assert.equal(needs.needsMapping, false);
+    assert.equal(needs.missingDescriptive, false);
+  });
+
+  test("flags missing required columns (date/amount) as needing mapping", () => {
+    const needs = getColumnMappingNeeds(["Transaction Date", "Category", "Debit Amount"]);
+    assert.equal(needs.needsMapping, true);
+    assert.deepEqual(needs.missingRequired.sort(), ["amount", "date"]);
+    assert.equal(needs.missingDescriptive, false);
+  });
+
+  test("flags needing mapping when both description and category are missing", () => {
+    const needs = getColumnMappingNeeds(["Date", "Amount", "Memo"]);
+    assert.equal(needs.needsMapping, true);
+    assert.deepEqual(needs.missingRequired, []);
+    assert.equal(needs.missingDescriptive, true);
+  });
+});
+
